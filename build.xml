@@ -2,7 +2,7 @@
 
 <project name="LoveToKnow" default="build">
    <target name="build">
-      <echo>i doubt this will work</echo>
+      <echo>maybe this will work?</echo>
    </target>
 
 </project>
