@@ -2,6 +2,6 @@
 
 <project name="LoveToKnow" default="build">
    <target name="build">
-      <echo>forgot to fingerprint</echo>
+      <echo>lets try it again</echo>
    </target>
 </project>
