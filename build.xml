@@ -2,7 +2,7 @@
 
 <project name="LoveToKnow" default="build">
    <target name="build">
-      <echo>fixed (again)</echo>
+      <echo>stable test</echo>
    </target>
 </project>
 
