@@ -4,5 +4,6 @@
    <target name="build">
       <echo>Needed to make a change</echo>
       <echo>and another</echo>
+      <echo>will it build this time?</echo>
    </target>
 </project>
