@@ -4,5 +4,6 @@
    <target name="build">
       <echo>trying full chain</echo>
    </target>
-</project>
+
+   another fail test
 
