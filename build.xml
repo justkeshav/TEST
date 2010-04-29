@@ -2,5 +2,6 @@
 
 <project name="LoveToKnow" default="build">
    <target name="build">
+      <echo>Needed to make a change</echo>
    </target>
 </project>
