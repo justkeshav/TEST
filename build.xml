@@ -2,7 +2,7 @@
 
 <project name="LoveToKnow" default="build">
    <target name="build">
-      <echo>fixed</echo>
+      <echo>trying full chain</echo>
    </target>
 </project>
 
