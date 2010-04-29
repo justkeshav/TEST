@@ -5,5 +5,5 @@
       <echo>maybe this will work if I config git for the test build with master specified?</echo>
    </target>
 
-</project>
+another fail test
 
