@@ -2,8 +2,7 @@
 
 <project name="LoveToKnow" default="build">
    <target name="build">
-      <echo>trying full chain</echo>
+      <echo>fixed (again)</echo>
    </target>
-
-   another fail test
+</project>
 
