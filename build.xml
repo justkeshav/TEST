@@ -2,9 +2,8 @@
 
 <project name="LoveToKnow" default="build">
    <target name="build">
-      <echo>lets try it again</echo>
+      <echo>this should fix it</echo>
    </target>
 
+</project>
 
-
-   now trying a failure
