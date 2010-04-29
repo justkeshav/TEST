@@ -2,8 +2,7 @@
 
 <project name="LoveToKnow" default="build">
    <target name="build">
-      <echo>maybe this will work if I config git for the test build with master specified?</echo>
+      <echo>fixed</echo>
    </target>
-
-another fail test
+</project>
 
