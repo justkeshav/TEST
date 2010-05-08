@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites failures="2" errors="0" tests="204" assertions="204" skipped="0">
+<testsuites name="backend" failures="2" errors="0" tests="204" assertions="204" skipped="0">
   <testsuite name="ArticleTest" file="/media/projects/LoveToKnow/site/test/functional/backend/ArticleTest.php" failures="0" errors="0" skipped="0" tests="20" assertions="20">
     <testcase name="request parameter &quot;module&quot; is &quot;article&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;action&quot; is &quot;edit&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>

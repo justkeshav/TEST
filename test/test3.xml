@@ -37,8 +37,8 @@
 -->
 
 <testsuite name="unit" timestamp="2010-05-07T22:44:45-05:00" hostname="localhost" tests="43" failures="0" errors="7" time="0.30434107780457">
-  <testcase name="testGetFullSlug" classname="unit.TitleTest" time="0.068444967269897"/>
-  <testcase name="testSearchByFilename" classname="unit.ImageTest" time="0.0062010288238525">
+  <testcase name="testGetFullSlug" classname="TitleTest" time="0.068444967269897"/>
+  <testcase name="testSearchByFilename" classname="ImageTest" time="0.0062010288238525">
     <failure message="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/ImageTest.php" type="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/ImageTest.php">TestSuite -&gt; /sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/ImageTest.php
 
 
@@ -69,7 +69,7 @@ Stack trace:
 #22 /sdf2/HUDSON/jobs/LoveToKnow/workspace/site/symfony(14): include('/sdf2/HUDSON/jo...')
 #23 {main}</failure>
   </testcase>
-  <testcase name="testSearchByFilenameMaxNotExceeded" classname="unit.ImageTest" time="0.0036349296569824">
+  <testcase name="testSearchByFilenameMaxNotExceeded" classname="ImageTest" time="0.0036349296569824">
     <failure message="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/ImageTest.php" type="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/ImageTest.php">TestSuite -&gt; /sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/ImageTest.php
 
 
@@ -100,7 +100,7 @@ Stack trace:
 #22 /sdf2/HUDSON/jobs/LoveToKnow/workspace/site/symfony(14): include('/sdf2/HUDSON/jo...')
 #23 {main}</failure>
   </testcase>
-  <testcase name="testSearchByFilenameWrongChannel" classname="unit.ImageTest" time="0.0036258697509766">
+  <testcase name="testSearchByFilenameWrongChannel" classname="ImageTest" time="0.0036258697509766">
     <failure message="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/ImageTest.php" type="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/ImageTest.php">TestSuite -&gt; /sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/ImageTest.php
 
 
@@ -131,11 +131,11 @@ Stack trace:
 #22 /sdf2/HUDSON/jobs/LoveToKnow/workspace/site/symfony(14): include('/sdf2/HUDSON/jo...')
 #23 {main}</failure>
   </testcase>
-  <testcase name="testGenUrl" classname="unit.ImageTest" time="0.0006861686706543"/>
-  <testcase name="testGetOrigUrl" classname="unit.ImageTest" time="0.00053906440734863"/>
-  <testcase name="testGetThumbUrl" classname="unit.ImageTest" time="0.00053501129150391"/>
-  <testcase name="testHasSize" classname="unit.ImageTest" time="0.0047409534454346"/>
-  <testcase name="testFindOneByUrl" classname="unit.ArticleTest" time="0.039510011672974">
+  <testcase name="testGenUrl" classname="ImageTest" time="0.0006861686706543"/>
+  <testcase name="testGetOrigUrl" classname="ImageTest" time="0.00053906440734863"/>
+  <testcase name="testGetThumbUrl" classname="ImageTest" time="0.00053501129150391"/>
+  <testcase name="testHasSize" classname="ImageTest" time="0.0047409534454346"/>
+  <testcase name="testFindOneByUrl" classname="ArticleTest" time="0.039510011672974">
     <failure message="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/ArticleTest.php" type="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/ArticleTest.php">TestSuite -&gt; /sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/ArticleTest.php
 
 
@@ -164,16 +164,16 @@ Stack trace:
 #20 /sdf2/HUDSON/jobs/LoveToKnow/workspace/site/symfony(14): include('/sdf2/HUDSON/jo...')
 #21 {main}</failure>
   </testcase>
-  <testcase name="testFindOneByUrlMissingUrl" classname="unit.ArticleTest" time="0.0005500316619873"/>
-  <testcase name="testFindOneByUrlMissingChannelSlug" classname="unit.ArticleTest" time="0.00041985511779785"/>
-  <testcase name="testFindOneByUrlMissingChannelSlugAlt" classname="unit.ArticleTest" time="0.00042295455932617"/>
-  <testcase name="testSlugGeneration" classname="unit.ltkUrlTest" time="0.0018939971923828"/>
-  <testcase name="testUserRoleAccessors" classname="unit.UserTest" time="0.013794898986816"/>
-  <testcase name="testUserLevelAccessors" classname="unit.UserTest" time="0.048949956893921"/>
-  <testcase name="testUserAssociatedChannels" classname="unit.UserTest" time="0.088422060012817"/>
-  <testcase name="testSettings" classname="unit.ChannelTest" time="0.00048398971557617"/>
-  <testcase name="testCantSetSettingDirectly" classname="unit.ChannelTest" time="0.00048208236694336"/>
-  <testcase name="testFindOneByUrl" classname="unit.CategoryTest" time="0.0077710151672363">
+  <testcase name="testFindOneByUrlMissingUrl" classname="ArticleTest" time="0.0005500316619873"/>
+  <testcase name="testFindOneByUrlMissingChannelSlug" classname="ArticleTest" time="0.00041985511779785"/>
+  <testcase name="testFindOneByUrlMissingChannelSlugAlt" classname="ArticleTest" time="0.00042295455932617"/>
+  <testcase name="testSlugGeneration" classname="ltkUrlTest" time="0.0018939971923828"/>
+  <testcase name="testUserRoleAccessors" classname="UserTest" time="0.013794898986816"/>
+  <testcase name="testUserLevelAccessors" classname="UserTest" time="0.048949956893921"/>
+  <testcase name="testUserAssociatedChannels" classname="UserTest" time="0.088422060012817"/>
+  <testcase name="testSettings" classname="ChannelTest" time="0.00048398971557617"/>
+  <testcase name="testCantSetSettingDirectly" classname="ChannelTest" time="0.00048208236694336"/>
+  <testcase name="testFindOneByUrl" classname="CategoryTest" time="0.0077710151672363">
     <failure message="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/CategoryTest.php" type="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/CategoryTest.php">TestSuite -&gt; /sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/CategoryTest.php
 
 
@@ -202,10 +202,10 @@ Stack trace:
 #20 /sdf2/HUDSON/jobs/LoveToKnow/workspace/site/symfony(14): include('/sdf2/HUDSON/jo...')
 #21 {main}</failure>
   </testcase>
-  <testcase name="testFindOneByUrlMissingUrl" classname="unit.CategoryTest" time="0.00049901008605957"/>
-  <testcase name="testFindOneByUrlMissingChannelSlug" classname="unit.CategoryTest" time="0.00039196014404297"/>
-  <testcase name="testFindOneByUrlMissingChannelSlugAlt" classname="unit.CategoryTest" time="0.00042891502380371"/>
-  <testcase name="testFetchTreeByChannel" classname="unit.CategoryTest" time="0.0033230781555176">
+  <testcase name="testFindOneByUrlMissingUrl" classname="CategoryTest" time="0.00049901008605957"/>
+  <testcase name="testFindOneByUrlMissingChannelSlug" classname="CategoryTest" time="0.00039196014404297"/>
+  <testcase name="testFindOneByUrlMissingChannelSlugAlt" classname="CategoryTest" time="0.00042891502380371"/>
+  <testcase name="testFetchTreeByChannel" classname="CategoryTest" time="0.0033230781555176">
     <failure message="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/CategoryTest.php" type="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/CategoryTest.php">TestSuite -&gt; /sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/CategoryTest.php
 
 
@@ -236,8 +236,8 @@ Stack trace:
 #22 /sdf2/HUDSON/jobs/LoveToKnow/workspace/site/symfony(14): include('/sdf2/HUDSON/jo...')
 #23 {main}</failure>
   </testcase>
-  <testcase name="testAmazonCloudFront" classname="unit.ltksfImageProviderTest" time="7.0095062255859E-5"/>
-  <testcase name="testFetchChannelDetailsByChannel" classname="unit.ChannelDetailTest" time="0.0034699440002441">
+  <testcase name="testAmazonCloudFront" classname="ltksfImageProviderTest" time="7.0095062255859E-5"/>
+  <testcase name="testFetchChannelDetailsByChannel" classname="ChannelDetailTest" time="0.0034699440002441">
     <failure message="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/ChannelDetailTest.php" type="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/ChannelDetailTest.php">TestSuite -&gt; /sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/unit/ChannelDetailTest.php
 
 
