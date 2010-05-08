@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites failures="10" errors="0" tests="19" assertions="19" skipped="0">
+  <testsuite name="ArticleTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/ArticleTest.php" failures="1" errors="0" skipped="0" tests="1" assertions="1"/>
+  <testsuite name="CategoryTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/CategoryTest.php" failures="1" errors="0" skipped="0" tests="1" assertions="1"/>
+  <testsuite name="ChannelDetailsActionsTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/ChannelDetailsActionsTest.php" failures="0" errors="0" skipped="0" tests="4" assertions="4">
+    <testcase name="request parameter &quot;module&quot; is &quot;ChannelDetails&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
+    <testcase name="request parameter &quot;action&quot; is &quot;show&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
+    <testcase name="status code is &quot;404&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
+    <testcase name="response selector &quot;body&quot; does not match regex &quot;/This is a temporary page/&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="100" assertions="1"/>
+  </testsuite>
+  <testsuite name="ChannelTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/ChannelTest.php" failures="1" errors="0" skipped="0" tests="1" assertions="1"/>
+  <testsuite name="FeatureArticleActionsTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/FeatureArticleActionsTest.php" failures="0" errors="0" skipped="0" tests="4" assertions="4">
+    <testcase name="request parameter &quot;module&quot; is &quot;FeatureArticle&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
+    <testcase name="request parameter &quot;action&quot; is &quot;index&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
+    <testcase name="status code is &quot;401&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
+    <testcase name="response selector &quot;body&quot; does not match regex &quot;/This is a temporary page/&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="100" assertions="1"/>
+  </testsuite>
+  <testsuite name="ImageTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/ImageTest.php" failures="1" errors="0" skipped="0" tests="1" assertions="1"/>
+  <testsuite name="QuizTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/QuizTest.php" failures="1" errors="0" skipped="0" tests="1" assertions="1"/>
+  <testsuite name="SlideTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/SlideTest.php" failures="1" errors="0" skipped="0" tests="1" assertions="1"/>
+  <testsuite name="SlideshowTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/SlideshowTest.php" failures="1" errors="0" skipped="0" tests="1" assertions="1"/>
+  <testsuite name="TitleAjaxTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/TitleAjaxTest.php" failures="0" errors="0" skipped="0" tests="1" assertions="1">
+    <testcase name="response content matches regex &quot;/Star Trek/&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="383" assertions="1"/>
+  </testsuite>
+  <testsuite name="TitleTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/TitleTest.php" failures="1" errors="0" skipped="0" tests="1" assertions="1"/>
+  <testsuite name="UserAccessTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/UserAccessTest.php" failures="1" errors="0" skipped="0" tests="1" assertions="1"/>
+  <testsuite name="UserTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/UserTest.php" failures="1" errors="0" skipped="0" tests="1" assertions="1"/>
+</testsuites>
