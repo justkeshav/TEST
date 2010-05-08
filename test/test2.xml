@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="frontend" failures="0" errors="0" tests="15" assertions="15" skipped="0">
-  <testsuite name="ArticleTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/frontend/ArticleTest.php" failures="0" errors="0" skipped="0" tests="" assertions="">
+<testsuites failures="0" errors="0" tests="15" assertions="15" skipped="0">
+  <testsuite name="functional.frontend.ArticleTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/frontend/ArticleTest.php" failures="0" errors="0" skipped="0" tests="" assertions="">
     <testcase name="status code is &quot;404&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="status code is &quot;404&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="status code is &quot;404&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
@@ -22,7 +22,7 @@
     <testcase name="status code is &quot;200&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="response selector &quot;.ads-bottom script&quot; matches regex &quot;/755234/&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="104" assertions="1"/>
   </testsuite>
-  <testsuite name="CategoryTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/frontend/CategoryTest.php" failures="0" errors="0" skipped="0" tests="" assertions="">
+  <testsuite name="functional.frontend.CategoryTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/frontend/CategoryTest.php" failures="0" errors="0" skipped="0" tests="" assertions="">
     <testcase name="status code is &quot;404&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="status code is &quot;404&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="status code is &quot;404&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
@@ -69,7 +69,7 @@
     <testcase name="request parameter &quot;page&quot; is &quot;0&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="status code is &quot;200&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
   </testsuite>
-  <testsuite name="CommonLayoutTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/frontend/CommonLayoutTest.php" failures="0" errors="0" skipped="0" tests="15" assertions="15">
+  <testsuite name="functional.frontend.CommonLayoutTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/frontend/CommonLayoutTest.php" failures="0" errors="0" skipped="0" tests="15" assertions="15">
     <testcase name="response selector &quot;#header&quot; matches &quot;1&quot; times" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="93" assertions="1"/>
     <testcase name="response selector &quot;#logo&quot; matches &quot;1&quot; times" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="93" assertions="1"/>
     <testcase name="response selector &quot;#tagline&quot; matches &quot;1&quot; times" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="93" assertions="1"/>
@@ -86,7 +86,7 @@
     <testcase name="response selector &quot;#footer .links&quot; matches &quot;1&quot; times" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="93" assertions="1"/>
     <testcase name="response selector &quot;#footer .legal&quot; matches &quot;1&quot; times" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="93" assertions="1"/>
   </testsuite>
-  <testsuite name="QuizTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/frontend/QuizTest.php" failures="0" errors="0" skipped="0" tests="" assertions="">
+  <testsuite name="functional.frontend.QuizTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/frontend/QuizTest.php" failures="0" errors="0" skipped="0" tests="" assertions="">
     <testcase name="status code is &quot;404&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="status code is &quot;404&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="status code is &quot;404&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
@@ -122,7 +122,7 @@
     <testcase name="status code is &quot;200&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="response selector &quot;div#accuracy&quot; matches &quot;You are 100% accurate.&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="110" assertions="1"/>
   </testsuite>
-  <testsuite name="SlideshowTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/frontend/SlideshowTest.php" failures="0" errors="0" skipped="0" tests="" assertions="">
+  <testsuite name="functional.frontend.SlideshowTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/frontend/SlideshowTest.php" failures="0" errors="0" skipped="0" tests="" assertions="">
     <testcase name="status code is &quot;404&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="status code is &quot;404&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="status code is &quot;404&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>

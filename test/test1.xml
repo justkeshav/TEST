@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="backend" failures="2" errors="0" tests="204" assertions="204" skipped="0">
-  <testsuite name="ArticleTest" file="/media/projects/LoveToKnow/site/test/functional/backend/ArticleTest.php" failures="0" errors="0" skipped="0" tests="20" assertions="20">
+<testsuites failures="2" errors="0" tests="204" assertions="204" skipped="0">
+  <testsuite name="functional.backend.ArticleTest" file="/media/projects/LoveToKnow/site/test/functional/backend/ArticleTest.php" failures="0" errors="0" skipped="0" tests="20" assertions="20">
     <testcase name="request parameter &quot;module&quot; is &quot;article&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;action&quot; is &quot;edit&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;id&quot; is &quot;20&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
@@ -22,7 +22,7 @@
     <testcase name="status code is &quot;200&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="response selector &quot;h1&quot; matches regex &quot;/^Revision #2/&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="104" assertions="1"/>
   </testsuite>
-  <testsuite name="CategoryTest" file="/media/projects/LoveToKnow/site/test/functional/backend/CategoryTest.php" failures="0" errors="0" skipped="0" tests="12" assertions="12">
+  <testsuite name="functional.backend.CategoryTest" file="/media/projects/LoveToKnow/site/test/functional/backend/CategoryTest.php" failures="0" errors="0" skipped="0" tests="12" assertions="12">
     <testcase name="request parameter &quot;module&quot; is &quot;category&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;action&quot; is &quot;edit&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;id&quot; is &quot;21&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
@@ -36,13 +36,13 @@
     <testcase name="request parameter &quot;id&quot; is &quot;21&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="status code is &quot;200&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
   </testsuite>
-  <testsuite name="ChannelDetailsActionsTest" file="/media/projects/LoveToKnow/site/test/functional/backend/ChannelDetailsActionsTest.php" failures="0" errors="0" skipped="0" tests="4" assertions="4">
+  <testsuite name="functional.backend.ChannelDetailsActionsTest" file="/media/projects/LoveToKnow/site/test/functional/backend/ChannelDetailsActionsTest.php" failures="0" errors="0" skipped="0" tests="4" assertions="4">
     <testcase name="request parameter &quot;module&quot; is &quot;ChannelDetails&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;action&quot; is &quot;show&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="status code is &quot;404&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="response selector &quot;body&quot; does not match regex &quot;/This is a temporary page/&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="100" assertions="1"/>
   </testsuite>
-  <testsuite name="ChannelTest" file="/media/projects/LoveToKnow/site/test/functional/backend/ChannelTest.php" failures="2" errors="0" skipped="0" tests="9" assertions="9">
+  <testsuite name="functional.backend.ChannelTest" file="/media/projects/LoveToKnow/site/test/functional/backend/ChannelTest.php" failures="2" errors="0" skipped="0" tests="9" assertions="9">
     <testcase name="request parameter &quot;module&quot; is &quot;channel&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;action&quot; is &quot;edit&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;id&quot; is &quot;2&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
@@ -58,13 +58,13 @@
       <failure type="lime"/>
     </testcase>
   </testsuite>
-  <testsuite name="FeatureArticleActionsTest" file="/media/projects/LoveToKnow/site/test/functional/backend/FeatureArticleActionsTest.php" failures="0" errors="0" skipped="0" tests="4" assertions="4">
+  <testsuite name="functional.backend.FeatureArticleActionsTest" file="/media/projects/LoveToKnow/site/test/functional/backend/FeatureArticleActionsTest.php" failures="0" errors="0" skipped="0" tests="4" assertions="4">
     <testcase name="request parameter &quot;module&quot; is &quot;FeatureArticle&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;action&quot; is &quot;index&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="status code is &quot;401&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="response selector &quot;body&quot; does not match regex &quot;/This is a temporary page/&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="100" assertions="1"/>
   </testsuite>
-  <testsuite name="ImageTest" file="/media/projects/LoveToKnow/site/test/functional/backend/ImageTest.php" failures="0" errors="0" skipped="0" tests="16" assertions="16">
+  <testsuite name="functional.backend.ImageTest" file="/media/projects/LoveToKnow/site/test/functional/backend/ImageTest.php" failures="0" errors="0" skipped="0" tests="16" assertions="16">
     <testcase name="request parameter &quot;module&quot; is &quot;image&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;action&quot; is &quot;edit&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;channel_id&quot; is &quot;29&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
@@ -82,7 +82,7 @@
     <testcase name="status code is &quot;200&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="response header &quot;content-type&quot; is &quot;application/json&quot; (application/json)" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="300" assertions="1"/>
   </testsuite>
-  <testsuite name="QuizTest" file="/media/projects/LoveToKnow/site/test/functional/backend/QuizTest.php" failures="0" errors="0" skipped="0" tests="20" assertions="20">
+  <testsuite name="functional.backend.QuizTest" file="/media/projects/LoveToKnow/site/test/functional/backend/QuizTest.php" failures="0" errors="0" skipped="0" tests="20" assertions="20">
     <testcase name="request parameter &quot;module&quot; is &quot;quiz&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;action&quot; is &quot;edit&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;id&quot; is &quot;10&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
@@ -104,7 +104,7 @@
     <testcase name="status code is &quot;200&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="response selector &quot;h1&quot; matches regex &quot;/^Revision #2/&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="104" assertions="1"/>
   </testsuite>
-  <testsuite name="SlideTest" file="/media/projects/LoveToKnow/site/test/functional/backend/SlideTest.php" failures="0" errors="0" skipped="0" tests="38" assertions="38">
+  <testsuite name="functional.backend.SlideTest" file="/media/projects/LoveToKnow/site/test/functional/backend/SlideTest.php" failures="0" errors="0" skipped="0" tests="38" assertions="38">
     <testcase name="request parameter &quot;module&quot; is &quot;slide&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;action&quot; is &quot;edit&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;slideshow_id&quot; is &quot;21&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
@@ -144,7 +144,7 @@
     <testcase name="response selector &quot;input[id=&quot;slide_heading&quot;][value=&quot;my heading&quot;]&quot; exists" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="89" assertions="1"/>
     <testcase name="response selector &quot;input[id=&quot;slide_image_id&quot;][value=&quot;291&quot;]&quot; exists" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="89" assertions="1"/>
   </testsuite>
-  <testsuite name="SlideshowTest" file="/media/projects/LoveToKnow/site/test/functional/backend/SlideshowTest.php" failures="0" errors="0" skipped="0" tests="22" assertions="22">
+  <testsuite name="functional.backend.SlideshowTest" file="/media/projects/LoveToKnow/site/test/functional/backend/SlideshowTest.php" failures="0" errors="0" skipped="0" tests="22" assertions="22">
     <testcase name="request parameter &quot;module&quot; is &quot;slideshow&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;action&quot; is &quot;edit&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;id&quot; is &quot;21&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
@@ -168,10 +168,10 @@
     <testcase name="status code is &quot;200&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="response selector &quot;h1&quot; matches regex &quot;/^Revision #2/&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="104" assertions="1"/>
   </testsuite>
-  <testsuite name="TitleAjaxTest" file="/media/projects/LoveToKnow/site/test/functional/backend/TitleAjaxTest.php" failures="0" errors="0" skipped="0" tests="1" assertions="1">
+  <testsuite name="functional.backend.TitleAjaxTest" file="/media/projects/LoveToKnow/site/test/functional/backend/TitleAjaxTest.php" failures="0" errors="0" skipped="0" tests="1" assertions="1">
     <testcase name="response content matches regex &quot;/Star Trek/&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="383" assertions="1"/>
   </testsuite>
-  <testsuite name="TitleTest" file="/media/projects/LoveToKnow/site/test/functional/backend/TitleTest.php" failures="0" errors="0" skipped="0" tests="12" assertions="12">
+  <testsuite name="functional.backend.TitleTest" file="/media/projects/LoveToKnow/site/test/functional/backend/TitleTest.php" failures="0" errors="0" skipped="0" tests="12" assertions="12">
     <testcase name="request parameter &quot;module&quot; is &quot;title&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="request parameter &quot;action&quot; is &quot;new&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterRequest.class.php" line="48" assertions="1"/>
     <testcase name="status code is &quot;200&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
@@ -185,7 +185,7 @@
     <testcase name="status code is &quot;200&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="response selector &quot;input[id=&quot;title_url&quot;][value=&quot;lord-rings/my-spiffy-category-title&quot;]&quot; exists" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="89" assertions="1"/>
   </testsuite>
-  <testsuite name="UserAccessTest" file="/media/projects/LoveToKnow/site/test/functional/backend/UserAccessTest.php" failures="0" errors="0" skipped="0" tests="15" assertions="15">
+  <testsuite name="functional.backend.UserAccessTest" file="/media/projects/LoveToKnow/site/test/functional/backend/UserAccessTest.php" failures="0" errors="0" skipped="0" tests="15" assertions="15">
     <testcase name="user is not authenticated" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterUser.class.php" line="92" assertions="1"/>
     <testcase name="status code is &quot;401&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="response selector &quot;#menu&quot; does not exist" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="85" assertions="1"/>
@@ -202,7 +202,7 @@
     <testcase name="response selector &quot;#menu a:last-child&quot; matches &quot;Logout&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="110" assertions="1"/>
     <testcase name="user is not authenticated" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterUser.class.php" line="92" assertions="1"/>
   </testsuite>
-  <testsuite name="UserTest" file="/media/projects/LoveToKnow/site/test/functional/backend/UserTest.php" failures="0" errors="0" skipped="0" tests="31" assertions="31">
+  <testsuite name="functional.backend.UserTest" file="/media/projects/LoveToKnow/site/test/functional/backend/UserTest.php" failures="0" errors="0" skipped="0" tests="31" assertions="31">
     <testcase name="user is not authenticated" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterUser.class.php" line="92" assertions="1"/>
     <testcase name="status code is &quot;401&quot;" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="response selector &quot;#menu&quot; does not exist" file="/media/projects/LoveToKnow/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="85" assertions="1"/>
