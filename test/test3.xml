@@ -35,7 +35,7 @@
 - case start ChannelDetailTest
   - test start: testFetchChannelDetailsByChannel
 -->
-
+<testsuites>
 <testsuite name="unit" timestamp="2010-05-07T22:44:45-05:00" hostname="localhost" tests="43" failures="0" errors="7" time="0.30434107780457">
   <testcase name="testGetFullSlug" classname="TitleTest" time="0.068444967269897"/>
   <testcase name="testSearchByFilename" classname="ImageTest" time="0.0062010288238525">
@@ -269,3 +269,4 @@ Stack trace:
 #23 {main}</failure>
   </testcase>
 </testsuite>
+</testsuites>
