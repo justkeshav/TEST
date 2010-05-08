@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites failures="0" errors="0" tests="15" assertions="15" skipped="0">
+<testsuites name="functional.frontend" failures="0" errors="0" tests="15" assertions="15" skipped="0">
   <testsuite name="ArticleTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/frontend/ArticleTest.php" failures="0" errors="0" skipped="0" tests="" assertions="">
     <testcase name="status code is &quot;404&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
     <testcase name="status code is &quot;404&quot;" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/lib/vendor/symfony/lib/test/sfTesterResponse.class.php" line="398" assertions="1"/>
