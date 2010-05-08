@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="functional.backend" failures="10" errors="0" tests="19" assertions="19" skipped="0">
+<testsuite name="functional.backend" failures="10" errors="0" tests="19" assertions="19" skipped="0">
   <testsuite name="ArticleTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/ArticleTest.php" failures="1" errors="0" skipped="0" tests="1" assertions="1"/>
   <testsuite name="CategoryTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/CategoryTest.php" failures="1" errors="0" skipped="0" tests="1" assertions="1"/>
   <testsuite name="ChannelDetailsActionsTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/ChannelDetailsActionsTest.php" failures="0" errors="0" skipped="0" tests="4" assertions="4">
@@ -25,4 +25,4 @@
   <testsuite name="TitleTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/TitleTest.php" failures="1" errors="0" skipped="0" tests="1" assertions="1"/>
   <testsuite name="UserAccessTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/UserAccessTest.php" failures="1" errors="0" skipped="0" tests="1" assertions="1"/>
   <testsuite name="UserTest" file="/sdf2/HUDSON/jobs/LoveToKnow/workspace/site/test/functional/backend/UserTest.php" failures="1" errors="0" skipped="0" tests="1" assertions="1"/>
-</testsuites>
+</testsuite>
