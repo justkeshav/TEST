@@ -3,7 +3,7 @@
 <project name="LoveToKnow" default="build">
 
 
-<echo>making sm change to forcce new build</echo>
+<echo>making sm change to forcce new build x2</echo>
 
 
    <!-- Set default property settings -->
