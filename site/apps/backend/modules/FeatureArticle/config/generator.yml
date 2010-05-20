@@ -1,0 +1,23 @@
+generator:
+  class: ltksfDoctrineGenerator
+  param:
+    model_class:           FeatureArticle
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          feature_article
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+    parent:                { model: Channel }
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    ~
+      filter:  ~
+      form:
+        class: BackendFeatureArticleForm
+      edit:    ~
+      new:     ~

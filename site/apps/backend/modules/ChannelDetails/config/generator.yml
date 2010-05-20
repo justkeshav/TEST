@@ -1,0 +1,23 @@
+generator:
+  class: ltksfDoctrineGenerator
+  param:
+    model_class:           ChannelDetails
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          channel_details
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+    parent:                { model: Channel }
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    ~
+      filter:  ~
+      form:
+        class: BackendChannelDetailsForm
+      edit:    ~
+      new:     ~

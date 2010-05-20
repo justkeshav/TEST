@@ -1,0 +1,29 @@
+generator:
+  class: ltksfDoctrineGenerator
+  param:
+    model_class:           File
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          file
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+    parent:                { model: Channel }    
+
+    config:
+      actions: ~
+      fields:
+        upload: { label: File }          
+      list:
+        title:   Files
+        display: [_link]
+      filter:  ~
+      form:   { class: BackendFileForm }
+      edit:
+        display:
+          NONE: [link, permission, source, description]          
+      new:
+        display:
+          NONE: [upload, permission, source, description]      

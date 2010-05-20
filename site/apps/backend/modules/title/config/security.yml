@@ -1,0 +1,33 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/08-Security
+
+new:
+  is_secure: true
+  credentials: [['Group Editor', 'Titler']]
+edit:
+  is_secure: true
+  credentials: [['Group Editor', 'Site Editor', 'Titler', 'Premium Writer', 'Reliable Writer', 'Novice Writer']]   
+activate:
+  is_secure: true
+  credentials: ['Group Editor']
+claim:
+  is_secure: true
+  credentials: [['Group Editor', 'Site Editor', 'Premium Writer', 'Reliable Writer', 'Novice Writer']]  
+unclaim:
+  is_secure: true
+  credentials: [['Group Editor', 'Site Editor', 'Premium Writer', 'Reliable Writer', 'Novice Writer']]
+submit:
+  is_secure: true
+  credentials: [['Group Editor', 'Site Editor', 'Premium Writer', 'Reliable Writer', 'Novice Writer']]
+approve:
+  is_secure: true
+  credentials: [['Group Editor', 'Site Editor']]  
+reject:
+  is_secure: true
+  credentials: [['Group Editor', 'Site Editor']]    
+publish:
+  is_secure: true
+  credentials: [['Group Editor', 'Site Editor']]  
+delete:
+  is_secure: true
+  credentials: [['Group Editor', 'Titler']]    

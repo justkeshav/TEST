@@ -1,0 +1,65 @@
+generator:
+  class: ltksfDoctrineGenerator
+  param:
+    model_class:           Quiz
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          quiz
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        title_id:     { label: Title }
+        message:      { label:End Message, help: Ending message for the quiz }
+        description1: { label:Description, help: Description displayed below title }
+        description2: { label:Bottom Description, help: Description displayed below questions for each page }
+        created_at:   { label:Date Created }
+        style:        { label:Style, help: eg. background-color:#cccccc }
+        result20:     { label:0-20% }
+        result40:     { label:21-40% }
+        result60:     { label:41-60% }
+        result80:     { label:61-80% }
+        result100:    { label:81-100% }
+      list:
+        title: Quizzes    
+        fields:
+          created_at:     { date_format:yyyy-MM-dd }
+        display: [=id, =title, _url, _format, =created_at]
+        sort:    [created_at, desc]
+        object_actions:
+          _edit: ~
+          _delete: ~
+          questions: { action: questions }
+          summary:   { action: summary }
+      filter: 
+        display: [created_at, updated_at, created_by, updated_by, version] 
+      form:
+        derivative_base_class: EmbeddedBackendTitleForm 
+        class: BackendQuizForm    
+      edit: 
+        title: Editing Quiz '%%title%%'
+        display:
+          NONE: [Title]
+          Content: [format, description1, description2, message, _questions] 
+          Properties: [questions_per_page, result_format, result_type, show_accuracy, login_position, login_text, _resultHeader, result20, result40, result60, result80, result100]
+        actions:
+          _list:    ~
+          _history: ~
+          properties: { action: properties, label: Hide Properties, params: onclick="toggleProperties(); return false;" id="properties" }          
+          _save:    ~
+      new:
+        display: 
+          Content: [format, description1, description2, message]
+          Properties: [questions_per_page, result_format, result_type, show_accuracy, login_position, login_text, _resultHeader, result20, result40, result60, result80, result100]
+        actions:
+          _list: ~
+          properties: { action: properties, label: Hide Properties, params: onclick="toggleProperties(); return false;" id="properties" }
+          _save: ~
+
+          
+          

@@ -1,0 +1,13 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/04-Settings
+
+prod:
+  .settings:
+    no_script_name:         true
+
+all:
+  .settings:
+    # Form security secret (CSRF protection)
+    csrf_secret:            7128eec93f94fd3378198219b7d8411250e096ec
+
+    standard_helpers:       [Partial, Cache, InternalUrl, Output]

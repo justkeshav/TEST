@@ -1,0 +1,1 @@
+<?php echo ($quiz->format == Quiz::TYPE_QUIZ ? 'Quiz' : 'Poll'); ?>

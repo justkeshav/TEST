@@ -1,0 +1,1 @@
+<?php echo link_to_content($quiz, null, array('absolute' => true, 'rel' => 'quiz'));

@@ -1,0 +1,48 @@
+# The auto-generated versions of indexSuccess.php and editSuccess.php has been overridden
+# to make a minor change to the h1 text. If you make any changes here please check for any
+# changes to those auto-generated files.
+
+generator:
+  class: ltksfDoctrineGenerator
+  param:
+    model_class:           Category
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          category
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        title_id: { label: Title }
+      list:
+        title: Categories
+        display: [=Title, _url] 
+        actions: {}
+      filter:  ~
+      form:
+        derivative_base_class: EmbeddedBackendTitleForm
+        class: BackendCategoryForm
+      edit:
+        title: Edit Category '%%title%%'
+        display:
+          NONE: [Title]
+          Content: [parent_category, _article]
+        actions:
+          _list:    ~
+          _history: ~
+          _save:    ~      
+      new:
+        title: New Category '%%title%%'
+        display:
+          NONE: [Title]
+          Content: [parent_category, _article]
+        actions:
+          _list:    ~
+          _save:    ~            
+      history: ~
+      show: ~

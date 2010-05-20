@@ -1,0 +1,33 @@
+Vertical:
+  Vertical_1:
+    id: 1
+    title: 'Money & Business'
+    url: /business.html
+  Vertical_2:
+    id: 2
+    title: 'Entertainment & Hobbies'
+    url: /entertainment.html
+  Vertical_3:
+    id: 3
+    title: 'Family & Lifestyle'
+    url: /family.html
+  Vertical_4:
+    id: 4
+    title: 'Beauty & Health'
+    url: /health.html
+  Vertical_5:
+    id: 5
+    title: 'Home, Garden & Events'
+    url: /home-garden.html
+  Vertical_6:
+    id: 6
+    title: 'Internet & Technology'
+    url: /internet.html
+  Vertical_7:
+    id: 7
+    title: 'Style & Shopping'
+    url: /style.html
+  Vertical_8:
+    id: 8
+    title: 'Travel & Vacations'
+    url: /travel.html

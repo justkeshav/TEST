@@ -1,0 +1,32 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    #title:        symfony project
+    #description:  symfony project
+    #keywords:     symfony, project
+    #language:     en
+    #robots:       index, follow
+
+  stylesheets:
+    - http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/redmond/jquery-ui.css
+    - /ltksfFormExtraPlugin/css/uploadify.css
+    - admin
+
+  javascripts:
+    - http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js
+    - http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js
+    - http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js
+    - jquery.form-2.36.js
+    - http://ajax.microsoft.com/ajax/jquery.validate/1.6/jquery.validate.min.js
+    - /ltksfFormExtraPlugin/js/jquery.uploadify.v2.1.0.min.js
+    - /sfFormExtraPlugin/js/double_list.js
+    - /ckeditor/ckeditor.js
+    - common
+
+  has_layout:     true
+  layout:         layout

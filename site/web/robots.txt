@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /index.
+Disallow: /frontend.
+Disallow: /frontend_
+Disallow: /backend.
+Disallow: /backend_
+Disallow: /css/
+Disallow: /js/
+Disallow: /sf/

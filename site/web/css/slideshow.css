@@ -1,0 +1,122 @@
+
+h1, h2, h3
+{
+   border-width: 0;
+}
+
+h1
+{
+   margin: 0 2px;
+   padding: 0;
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 946px;
+   height: 31px;
+   overflow: hidden;
+   line-height: 31px;
+   text-align: center;
+   background: url(../images/logo.gif) no-repeat bottom left;
+}
+
+#content
+{
+   position: absolute;
+   top: 31px;
+   left: 650px;
+   width: 280px;
+   height: 303px;
+   overflow: auto;
+   margin: 0;
+   padding: 10px;
+   border: 1px solid #000000;
+   border-width: 1px 0;
+}
+
+#content p
+{
+   margin: 0 0 10px 0;
+}
+
+#image
+{
+   position: absolute;
+   top: 31px;
+   left: 0;
+   width: 600px;
+   height: 500px;
+   overflow: hidden;
+   margin: 0;
+   padding: 25px;
+   background-color: #000000;
+   line-height: 500px;
+   text-align: center;
+}
+
+#image img
+{
+   vertical-align: middle;
+}
+
+#buttons
+{
+   position: absolute;
+   top: 581px;
+   left: 0;
+   width: 650px;
+   height: 25px;
+   overflow: hidden;
+   background: url(images/slideshow-btn-bg.gif) repeat-x;
+}
+
+#buttons button,
+#buttons a
+{
+   display: block;
+   float: left;
+   width: 161px;
+   height: 25px;
+   overflow: hidden;
+   border-width: 0;
+   border-right: 1px solid #993366;
+   line-height: 26px !important;
+   text-align: center;
+   margin: 0;
+   padding: 0;
+   color: #993366;
+   text-decoration: none;
+   font-weight: bold;
+   background: transparent;
+   font-size: 12px;
+   font-family: inherit;
+}
+
+#buttons button#close
+{
+   width: 164px;
+}
+
+
+#buttons button#pause
+{
+   width: 162px;
+}
+
+#ad
+{
+   position: absolute;
+   top: 356px;
+   left: 650px;
+   width: 300px;
+   height: 250px;
+   overflow: hidden;
+   margin: 0;
+   padding: 0;
+}
+
+#ad noscript img
+{
+   width: 300px;
+   height: 250px;
+   border-width: 0;
+}

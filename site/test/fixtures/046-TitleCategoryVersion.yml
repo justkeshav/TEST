@@ -1,0 +1,161 @@
+TitleCategoryVersion:
+  TitleCategoryVersion_451_2_1:
+    title_id: 451
+    category_id: '2'
+    created_at: '2010-05-03 20:58:53'
+    updated_at: '2010-05-03 20:58:53'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_2_2_1:
+    title_id: 2
+    category_id: '2'
+    created_at: '2010-05-03 20:58:53'
+    updated_at: '2010-05-03 20:58:53'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_2079_42_1:
+    title_id: 2079
+    category_id: '42'
+    created_at: '2010-03-04 19:53:34'
+    updated_at: '2010-03-04 19:53:34'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_1989_46_1:
+    title_id: 1989
+    category_id: '46'
+    created_at: '2010-03-04 19:53:34'
+    updated_at: '2010-03-04 19:53:34'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_2007_46_1:
+    title_id: 2007
+    category_id: '46'
+    created_at: '2010-03-04 19:53:34'
+    updated_at: '2010-03-04 19:53:34'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_1983_46_1:
+    title_id: 1983
+    category_id: '46'
+    created_at: '2010-03-04 19:53:34'
+    updated_at: '2010-03-04 19:53:34'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_1985_46_1:
+    title_id: 1985
+    category_id: '46'
+    created_at: '2010-03-04 19:53:34'
+    updated_at: '2010-03-04 19:53:34'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_1975_46_1:
+    title_id: 1975
+    category_id: '46'
+    created_at: '2010-03-04 19:53:34'
+    updated_at: '2010-03-04 19:53:34'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_10856_27_1:
+    title_id: 10856
+    category_id: '27'
+    created_at: '2010-03-04 19:57:53'
+    updated_at: '2010-03-04 19:57:53'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_10869_27_1:
+    title_id: 10869
+    category_id: '27'
+    created_at: '2010-03-04 19:58:19'
+    updated_at: '2010-03-04 19:58:19'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_10860_27_1:
+    title_id: 10860
+    category_id: '27'
+    created_at: '2010-03-04 19:58:00'
+    updated_at: '2010-03-04 19:58:00'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_10868_27_1:
+    title_id: 10868
+    category_id: '27'
+    created_at: '2010-03-04 19:58:18'
+    updated_at: '2010-03-04 19:58:18'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_10877_27_1:
+    title_id: 10877
+    category_id: '27'
+    created_at: '2010-03-04 19:58:41'
+    updated_at: '2010-03-04 19:58:41'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_10877_33_1:
+    title_id: 10877
+    category_id: '33'
+    created_at: '2010-03-04 19:58:41'
+    updated_at: '2010-03-04 19:58:41'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_32_21_1:
+    title_id: 32
+    category_id: '21'
+    created_at: '2010-03-04 19:53:25'
+    updated_at: '2010-03-04 19:53:25'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_32_33_1:
+    title_id: 32
+    category_id: '33'
+    created_at: '2010-03-04 19:53:25'
+    updated_at: '2010-03-04 19:53:25'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_10906_31_1:
+    title_id: 10906
+    category_id: '31'
+    created_at: '2010-03-04 20:00:40'
+    updated_at: '2010-03-04 20:00:40'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_2042_42_1:
+    title_id: 2042
+    category_id: '42'
+    created_at: '2010-03-04 19:53:34'
+    updated_at: '2010-03-04 19:53:34'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_10917_42_1:
+    title_id: 10917
+    category_id: '42'
+    created_at: '2010-03-04 20:01:25'
+    updated_at: '2010-03-04 20:01:25'
+    created_by: null
+    updated_by: null
+    version: '1'
+  TitleCategoryVersion_10922_43_1:
+    title_id: 10922
+    category_id: '43'
+    created_at: '2010-03-04 20:02:00'
+    updated_at: '2010-03-04 20:02:00'
+    created_by: null
+    updated_by: null
+    version: '1'

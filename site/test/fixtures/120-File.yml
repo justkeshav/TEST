@@ -1,0 +1,10 @@
+File:
+  File_1:
+    id: 1
+    Channel: Channel_2
+    host: diet.lovetoknow.local
+    path: files
+    filename: sample.pdf
+    source: ''
+    permission: ''
+    description: null

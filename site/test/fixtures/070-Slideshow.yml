@@ -1,0 +1,55 @@
+Slideshow:
+  Slideshow_17:
+    id: 17
+    Title: Title_10856
+    created_at: '2008-11-24 23:25:29'
+    updated_at: '2008-11-24 23:25:29'
+    version: '1'
+  Slideshow_30:
+    id: 30
+    Title: Title_10869
+    created_at: '2008-11-24 23:40:46'
+    updated_at: '2008-11-24 23:40:46'
+    version: '1'
+  Slideshow_21:
+    id: 21
+    Title: Title_10860
+    created_at: '2008-11-24 23:40:35'
+    updated_at: '2008-11-24 23:40:35'
+    version: '1'
+  Slideshow_29:
+    id: 29
+    Title: Title_10868
+    created_at: '2008-11-24 23:40:46'
+    updated_at: '2008-11-24 23:40:46'
+    version: '1'
+  Slideshow_38:
+    id: 38
+    Title: Title_10877
+    created_at: '2008-12-29 11:51:54'
+    updated_at: '2008-12-29 11:51:54'
+    version: '1'
+  Slideshow_67:
+    id: 67
+    Title: Title_10906
+    created_at: '2009-11-19 22:07:03'
+    updated_at: '2009-11-19 22:07:03'
+    version: '1'
+  Slideshow_78:
+    id: 78
+    Title: Title_10917
+    created_at: '2009-05-31 16:40:42'
+    updated_at: '2009-05-31 16:40:42'
+    version: '1'
+  Slideshow_83:
+    id: 83
+    Title: Title_10922
+    created_at: '2009-12-24 09:46:40'
+    updated_at: '2009-12-24 09:46:40'
+    version: '1'
+  Slideshow_82:
+    id: 82
+    Title: Title_10921
+    created_at: '2009-11-22 15:16:56'
+    updated_at: '2009-11-22 15:16:56'
+    version: '1'

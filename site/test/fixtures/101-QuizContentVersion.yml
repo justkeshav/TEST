@@ -1,0 +1,166 @@
+QuizContentVersion:
+  QuizContentVersion_1_1:
+    QuizContent: QuizContent_1
+    quiz_id: '1'
+    message: 'Salads are the best choice for healthy eating.'
+    format: '1'
+    image_id: null
+    image_link: ''
+    is_valid: false
+    parent_id: '0'
+    total_count: '0'
+    created_at: '2010-03-15 23:23:16'
+    updated_at: '2010-03-15 23:23:16'
+    created_by: null
+    updated_by: null
+    version: '1'
+  QuizContentVersion_2_1:
+    QuizContent: QuizContent_2
+    quiz_id: '1'
+    message: 'Yes, but salads can become boring unless you add dressings and toppings.|Incorrect. Extras added, and salads at fast food restaurants can contain more calories than a hamburger.'
+    format: '0'
+    image_id: null
+    image_link: null
+    is_valid: false
+    parent_id: '1'
+    total_count: '0'
+    created_at: '2010-03-15 23:23:16'
+    updated_at: '2010-03-15 23:23:16'
+    created_by: null
+    updated_by: null
+    version: '1'
+  QuizContentVersion_3_1:
+    QuizContent: QuizContent_3
+    quiz_id: '1'
+    message: 'No, they lack protein.|Incorrect. Proteins often added to salads include nuts, seeds, beans, eggs, olives, avocados, chicken or fish.'
+    format: '0'
+    image_id: null
+    image_link: null
+    is_valid: false
+    parent_id: '1'
+    total_count: '0'
+    created_at: '2010-03-15 23:23:16'
+    updated_at: '2010-03-15 23:23:16'
+    created_by: null
+    updated_by: null
+    version: '1'
+  QuizContentVersion_4_1:
+    QuizContent: QuizContent_4
+    quiz_id: '1'
+    message: 'Yes, salads full of fresh vegetables are packed with healthy vitamins and minerals.|Correct. Stick to vegetables and a light dressing on the side. If you can''t, you might be better off choosing a small burger and an order of fruit or a plain baked potato.'
+    format: '0'
+    image_id: null
+    image_link: null
+    is_valid: true
+    parent_id: '1'
+    total_count: '0'
+    created_at: '2010-03-15 23:23:16'
+    updated_at: '2010-03-15 23:23:16'
+    created_by: null
+    updated_by: null
+    version: '1'
+  QuizContentVersion_5_1:
+    QuizContent: QuizContent_5
+    quiz_id: '1'
+    message: 'Eating a vegetarian diet will for sure help you lose weight.'
+    format: '1'
+    image_id: null
+    image_link: ''
+    is_valid: false
+    parent_id: '0'
+    total_count: '0'
+    created_at: '2010-03-15 23:25:13'
+    updated_at: '2010-03-15 23:25:13'
+    created_by: null
+    updated_by: null
+    version: '1'
+  QuizContentVersion_6_1:
+    QuizContent: QuizContent_6
+    quiz_id: '1'
+    message: 'Just because a dish is vegetarian doesn''t mean it is low in fat or good for me.|Correct. Vegetarian options often replace meat with flavor boosters like mayonnaise, cheese, and dressings, which increase the calorie count.'
+    format: '0'
+    image_id: null
+    image_link: null
+    is_valid: true
+    parent_id: '5'
+    total_count: '0'
+    created_at: '2010-03-15 23:25:13'
+    updated_at: '2010-03-15 23:25:13'
+    created_by: null
+    updated_by: null
+    version: '1'
+  QuizContentVersion_7_1:
+    QuizContent: QuizContent_7
+    quiz_id: '1'
+    message: 'Eliminating animal fat from my diet is sure to help me drop weight.|Incorrect. If animal fat is replaced by sauces, and other high calorie options you won''t lose weight.'
+    format: '0'
+    image_id: null
+    image_link: null
+    is_valid: false
+    parent_id: '5'
+    total_count: '0'
+    created_at: '2010-03-15 23:25:13'
+    updated_at: '2010-03-15 23:25:13'
+    created_by: null
+    updated_by: null
+    version: '1'
+  QuizContentVersion_8_1:
+    QuizContent: QuizContent_8
+    quiz_id: '1'
+    message: 'Increased fruits and vegetables will let me eat more and still lose weight.|Incorrect. Losing weight depends on calories in vs. calories burned, too many calories, even when they come from fruits and vegetables will make you gain weight.'
+    format: '0'
+    image_id: null
+    image_link: null
+    is_valid: false
+    parent_id: '5'
+    total_count: '0'
+    created_at: '2010-03-15 23:25:13'
+    updated_at: '2010-03-15 23:25:13'
+    created_by: null
+    updated_by: null
+    version: '1'
+  QuizContentVersion_9_1:    
+    QuizContent: QuizContent_9
+    quiz_id: '1'
+    message: 'Salads are the best choice for healthy eating.'
+    format: '1'
+    image_id: null
+    image_link: ''
+    is_valid: false
+    parent_id: '0'
+    total_count: '0'
+    created_at: '2010-03-16 14:34:12'
+    updated_at: '2010-03-16 14:34:12'
+    created_by: null
+    updated_by: null
+    version: '1'
+  QuizContentVersion_10_1:
+    QuizContent: QuizContent_10
+    quiz_id: '1'
+    message: 'Yes, but salads can become boring unless you add dressings and toppings.|Incorrect. Extras added, and salads at fast food restaurants can contain more calories than a hamburger.'
+    format: '0'
+    image_id: null
+    image_link: null
+    is_valid: false
+    parent_id: '1'
+    total_count: '0'
+    created_at: '2010-03-16 14:34:12'
+    updated_at: '2010-03-16 14:34:12'
+    created_by: null
+    updated_by: null
+    version: '1'
+  QuizContentVersion_11_1:
+    QuizContent: QuizContent_11
+    quiz_id: '1'
+    message: 'No, they lack protein.|Incorrect. Proteins often added to salads include nuts, seeds, beans, eggs, olives, avocados, chicken or fish.'
+    format: '0'
+    image_id: null
+    image_link: null
+    is_valid: false
+    parent_id: '1'
+    total_count: '0'
+    created_at: '2010-03-16 14:34:12'
+    updated_at: '2010-03-16 14:34:12'
+    created_by: null
+    updated_by: null
+    version: '1'

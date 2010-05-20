@@ -1,0 +1,145 @@
+h1
+{
+   margin: 0;
+   padding: 0;
+}
+
+#quiz,
+#results
+{
+   width: 440px;
+   margin: 10px;
+   padding: 10px;
+}
+
+#quiz p
+{
+	margin-top:8px;
+	margin-bottom:8px;
+}
+
+#results
+{
+	border: 1px solid #999999;
+	background: url('images/slide_bg.jpg');
+	background-repeat: no-repeat;
+}
+
+#results .answer
+{
+	font-style: italic;
+}
+
+#results .response
+{
+	font-weight: bold;
+}
+
+#graph
+{
+	border:1px solid #CCCCCC;
+	margin: 12px 0 12px 0;
+	padding: 6px;
+}
+
+#graph h4
+{
+   margin: 0;
+   padding: 0;	
+}
+
+#graph #bars
+{
+	margin: 12px 0 0 0;
+}
+	
+
+#bars #bar
+{
+	margin: 6px 0 6px 0;
+	padding: 0;
+	height: 15px;
+}
+
+#bar span
+{
+	float: right;
+	padding: 3px 3px 0 0;
+}
+
+#image
+{
+   text-align: center;
+   margin: 12px 0 12px 0;
+}
+
+#image img
+{
+   vertical-align: middle;
+}
+
+#question,
+#score,
+#accuracy
+{
+	font-weight: bold;
+}
+
+#answers
+{
+	margin: 12px 0 12px 5px;
+	padding: 0;
+}
+
+#answers ul,
+#answers li,
+#answers th
+{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#answers table
+{
+	margin-top: -6px;
+}
+
+#score
+{
+	margin: 12px 0 24px 0;
+}
+
+/*
+  Backend Styles
+*/
+
+div.content textarea#quiz_description1,
+div.content textarea#quiz_description2,
+div.content textarea#quiz_message,
+div.content textarea#quiz_login_text,
+div.content textarea#quiz_result20,
+div.content textarea#quiz_result40,
+div.content textarea#quiz_result60,
+div.content textarea#quiz_result80,
+div.content textarea#quiz_result100
+{
+	width: 465px;
+	height: 48px;
+}
+
+div.content input#quiz_style
+{
+	width: 465px;
+}
+
+div.content input#quiz_questions_per_page
+{
+	width: 32px;
+}
+
+#sf_fieldset_properties
+{
+	display:block;
+}
+

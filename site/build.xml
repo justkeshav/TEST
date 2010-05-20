@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<project name="LoveToKnow" default="build">
+
+   <!-- Set default property settings -->
+   <property name="build.interactive" value="true" />
+   <property name="build.interactive.firstrun" value="false" />
+   <property name="build.test" value="false" />
+   <property name="deploy" value="false" />
+   <property name="deploy.dev" value="false" />
+   <property name="provider.cache.query" value="Doctrine_Cache_Array" />
+   <property name="provider.cache.result" value="Doctrine_Cache_Array" />
+   <property name="provider.cache.result.lifespan" value="3600" />
+   <property name="provider.image" value="ltksfFileSystemImageProvider" />
+   <property name="provider.image.host" value="" />
+   <property name="provider.image.bucket" value="" />
+   <property name="provider.file" value="ltksfFileSystemFileProvider" />
+   <property name="provider.file.host" value="" />
+   <property name="provider.file.bucket" value="" />
+   <property name="aws.key.access" value="" />
+   <property name="aws.key.secret" value="" />
+   <property name="web.cache.static" value="false" />
+
+   <if>
+      <istrue value="${build.interactive}" />
+      <then>
+         <!-- load in properties from froma file if it exists -->
+         <if>
+            <available file="build.properties" type="file" />
+            <then>
+               <property file="build.properties" />
+            </then>
+            <else>
+               <echo>You do not have a build.properties file (or I do not have permission</echo>
+               <echo>to access it). I can create this file for you from your answers to</echo>
+               <echo>the following questions.</echo>
+               <property name="build.interactive.firstrun" value="true" override="true" />
+            </else>
+         </if>
+      </then>
+      <else>
+         <echo>Non-interactive build--assuming all properties set via command-line</echo>
+      </else>
+   </if>
+
+   <if>
+      <istrue value="${build.interactive}" />
+      <then>
+         <!-- Prompt for property values that were not specified in the property file -->
+         <propertyprompt propertyName="web.user.group" promptText="What is the web server user's group" defaultValue="www-data" useExistingValue="true" />
+         <propertyprompt propertyName="web.host" promptText="What is the site's host name" defaultValue="lovetoknow.local" useExistingValue="true" />
+         <propertyprompt propertyName="web.host.static" promptText="What is the site's host name for static content" defaultValue="static.lovetoknow.local" useExistingValue="true" />
+         <propertyprompt propertyName="web.dir.site" promptText="What is the path to the site dir" defaultValue="/ltk/ltk/dev/site" useExistingValue="true" />
+         <propertyprompt propertyName="cli.mysql" promptText="What is your MySQL client command" defaultValue="mysql" useExistingValue="true" />
+         <propertyprompt propertyName="db.basename" promptText="What is the database name" defaultValue="ltk" useExistingValue="true" />
+         <propertyprompt propertyName="db.host" promptText="What is the database server host name" defaultValue="localhost" useExistingValue="true" />
+         <propertyprompt propertyName="db.username" promptText="What is the database username" defaultValue="root" useExistingValue="true" />
+         <propertyprompt propertyName="db.password" promptText="What is the database password" useExistingValue="true" />
+         <property name="deploy.db.host" value="${db.host}" />
+         <property name="deploy.db.username" value="${db.username}" />
+         <property name="deploy.db.password" value="${db.password}" />
+      </then>
+   </if>
+
+   <!-- If this script created the properties file, save properties to file so they dont have to be input again -->
+   <if>
+      <istrue value="${build.interactive}" />
+      <then>
+         <delete file="build.properties" />
+         <append destFile="build.properties" text="web.user.group=${web.user.group}${line.separator}" />
+         <append destFile="build.properties" text="web.host=${web.host}${line.separator}" />
+         <append destFile="build.properties" text="web.host.static=${web.host.static}${line.separator}" />
+         <append destFile="build.properties" text="web.dir.site=${web.dir.site}${line.separator}" />
+         <append destFile="build.properties" text="${line.separator}" />
+         <append destFile="build.properties" text="cli.mysql=${cli.mysql}${line.separator}" />
+         <append destFile="build.properties" text="${line.separator}" />
+         <append destFile="build.properties" text="db.basename=${db.basename}${line.separator}" />
+         <append destFile="build.properties" text="db.host=${db.host}${line.separator}" />
+         <append destFile="build.properties" text="db.username=${db.username}${line.separator}" />
+         <append destFile="build.properties" text="db.password=${db.password}${line.separator}" />
+      </then>
+   </if>
+
+   <!-- Sets the DSTAMP, TSTAMP and TODAY properties -->
+   <tstamp />
+
+   <target name="build">
+
+      <!-- Set properties based on inputs -->
+      <property name="db.name" value="${db.basename}" />
+      <property name="db.test.name" value="TEST-${db.name}" />
+
+      <!-- Tweak properties if this is a test build -->
+      <if>
+         <istrue value="${build.test}" />
+         <then>
+            <property name="db.name" value="${db.test.name}" override="true" />
+         </then>
+      </if>
+
+      <!-- Replace all vars in files with ".example." in their name and rename without the ".example" -->
+      <copy todir="." overwrite="true">
+         <fileset dir=".">
+            <include name="**/*.example.*" />
+         </fileset>
+         <mapper type="regexp" from="^(.*)\.example\.(.*)$" to="\1.\2"/>
+         <filterchain>
+            <expandproperties />
+         </filterchain>
+      </copy>
+
+      <!-- Make sure the cache dir exists and is writable by the web server, but is empty -->
+      <delete dir="cache" includeemptydirs="true" verbose="true" failonerror="true" />
+      <mkdir dir="cache" />
+      <exec command="chgrp ${web.user.group} cache" passthru="true" checkreturn="true" />
+      <exec command="chmod g+w cache" passthru="true" checkreturn="true" />
+
+      <!-- Make sure the log dir exists and is writable by the web server, but is empty -->
+      <delete dir="log" includeemptydirs="true" verbose="true" failonerror="false" />
+      <mkdir dir="log" />
+      <exec command="chgrp ${web.user.group} log" passthru="true" checkreturn="true" />
+      <exec command="chmod g+w log" passthru="true" checkreturn="true" />
+
+      <!-- Make sure the web/uploads dir exists and is writable by the web server, but is empty -->
+      <delete dir="web/uploads" includeemptydirs="true" verbose="true" failonerror="true" />
+      <mkdir dir="web/uploads" />
+      <exec command="chgrp ${web.user.group} web/uploads" passthru="true" checkreturn="true" />
+      <exec command="chmod g+w web/uploads" passthru="true" checkreturn="true" />
+
+      <!-- Make sure the web/images dir exists and is writable by the web server -->
+      <mkdir dir="web/images" />
+      <exec command="chgrp ${web.user.group} web/images" passthru="true" checkreturn="true" />
+      <exec command="chmod g+w web/images" passthru="true" checkreturn="true" />
+
+      <!-- Make sure the web/files dir exists and is writable by the web server -->
+      <mkdir dir="web/files" />
+      <exec command="chgrp ${web.user.group} web/files" passthru="true" checkreturn="true" />
+      <exec command="chmod g+w web/files" passthru="true" checkreturn="true" />
+
+      <!-- Make sure the symfony command is executable and then have it fix directory permissions -->
+      <exec command="chmod a+x symfony" passthru="true" checkreturn="true" />
+      <exec command="./symfony project:permissions" checkreturn="true" />
+
+      <!-- Set database script file names -->
+      <property name="db.dir.sql" value="data/sql" />
+      <property name="db.dir.deltas" value="${db.dir.sql}/deltas" />
+      <property name="db.dir.deploy" value="${db.dir.sql}/deploy" />
+      <property name="db.file.create" value="${db.dir.sql}/create.sql" />
+      <property name="db.file.deploy" value="${db.dir.deploy}/deploy-${DSTAMP}${TSTAMP}.sql" />
+      <property name="db.file.undo" value="${db.dir.deploy}/undo-${DSTAMP}${TSTAMP}.sql" />
+
+      <!-- Make sure the db deploy dir exists, but is empty -->
+      <delete dir="${db.dir.deploy}" includeemptydirs="true" verbose="true" failonerror="true" />
+      <mkdir dir="${db.dir.deploy}" />
+
+      <!-- Create database if it doesnt exist -->
+      <exec command="${cli.mysql} -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} &lt; ${db.file.create}" passthru="true" checkreturn="true" />
+
+      <!-- load the dbdeploy task -->
+      <taskdef name="dbdeploy" classname="phing.tasks.ext.dbdeploy.DbDeployTask"/>
+
+      <!-- Generate the deployment scripts -->
+      <dbdeploy
+         url="mysql:host=${deploy.db.host};dbname=${db.name}"
+         userid="${deploy.db.username}"
+         password="${deploy.db.password}"
+         dir="${db.dir.deltas}"
+         outputfile="${db.file.deploy}"
+         undooutputfile="${db.file.undo}" />
+
+      <!-- Run the deployment file; use mysql command line to avoid trouble with large files or many statements and PDO -->
+      <exec command="${cli.mysql} -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} ${db.name} &lt; ${db.file.deploy}" passthru="true" checkreturn="true" />
+
+      <!-- load the batchdeploy task -->
+      <taskdef name="batchdeploy" classname="phing.tasks.user.BatchDeployTask"/>
+
+      <!-- Generate the deployment scripts -->
+      <batchdeploy
+         url="mysql:host=${deploy.db.host};dbname=${db.name}"
+         userid="${deploy.db.username}"
+         password="${deploy.db.password}"
+         dir="batch/deltas" />
+
+      <!-- Run automated tests if this is a test build -->
+      <if>
+         <istrue value="${build.test}" />
+         <then>
+            <!-- Setup test file names -->
+            <property name="test.dir.results" value="test/results" />
+            <property name="test.file.results.unit" value="${test.dir.results}/unit.xml" />
+            <property name="test.file.results.functional.frontend" value="${test.dir.results}/functional-frontend.xml" />
+            <property name="test.file.results.functional.backend" value="${test.dir.results}/functional-backend.xml" />
+
+            <!-- Make sure the test results dir exists, but is empty -->
+            <delete dir="${test.dir.results}" includeemptydirs="true" verbose="true" failonerror="true" />
+            <mkdir dir="${test.dir.results}" />
+
+            <!-- Run unit tests -->
+            <exec command="./symfony simpletest:unit --xml=${test.file.results.unit}" />
+
+            <!-- Run frontend functional tests -->
+            <exec command="./symfony test:functional frontend --xml=${test.file.results.functional.frontend}" />
+
+            <!-- Run backend functional tests -->
+            <exec command="./symfony test:functional backend --xml=${test.file.results.functional.backend}" />
+
+            <!-- Fix up results files to have package names -->
+            <reflexive file="${test.file.results.unit}">
+               <filterchain>
+                  <replaceregexp>
+                     <regexp pattern="classname=&quot;" replace="classname=&quot;unit." />
+                  </replaceregexp>
+               </filterchain>
+            </reflexive>
+            <reflexive file="${test.file.results.functional.frontend}">
+               <filterchain>
+                  <replaceregexp>
+                     <regexp pattern="testsuite name=&quot;" replace="testsuite name=&quot;functional.frontend." />
+                  </replaceregexp>
+               </filterchain>
+            </reflexive>
+            <reflexive file="${test.file.results.functional.backend}">
+               <filterchain>
+                  <replaceregexp>
+                     <regexp pattern="testsuite name=&quot;" replace="testsuite name=&quot;functional.backend." />
+                  </replaceregexp>
+               </filterchain>
+            </reflexive>
+         </then>
+
+         <!-- Deploy the project files if deployment destination is set and this is not a test build -->
+         <elseif>
+            <istrue value="${deploy}" />
+            <then>
+               <!-- Make sure the deploy dir exists -->
+               <mkdir dir="${deploy.path}" />
+
+               <!-- This first rsync run excludes certain dirs that are known to contain user-generated files so those files dont get deleted -->
+               <exec command="${cli.rsync} --progress -rzpgEt --force --delete --exclude='/web/images/*/**' . ${deploy.path}/site" passthru="true" checkreturn="true" />
+
+               <!-- This second run of rsync runs on the previously excluded dirs, but does not include the delete option -->
+               <exec command="${cli.rsync} --progress -rzpgEt --force web/images ${deploy.path}/site/web" passthru="true" checkreturn="true" />
+
+               <!-- Set extra debug output for dev sites -->
+               <if>
+                  <istrue value="${deploy.dev}" />
+                  <then>
+                     <reflexive file="${deploy.path}/site/apps/frontend/config/settings.yml">
+                        <filterchain>
+                           <replaceregexp>
+                              <regexp pattern="no_script_name:\s*false" replace="no_script_name: true" />
+                           </replaceregexp>
+                        </filterchain>
+                     </reflexive>
+                     <reflexive file="${deploy.path}/site/web/index.php">
+                        <filterchain>
+                           <replaceregexp>
+                              <regexp pattern="'prod', false" replace="'dev', true" />
+                           </replaceregexp>
+                        </filterchain>
+                     </reflexive>
+                  </then>
+               </if>
+            </then>
+         </elseif>
+      </if>
+
+      <if>
+         <istrue value="${build.interactive.firstrun}" />
+         <then>
+            <echo level="warning">Please add 'Include ${web.dir.site}/config/httpd.conf' to your apache conf file and restart apache.</echo>
+         </then>
+      </if>
+
+   </target>
+
+</project>

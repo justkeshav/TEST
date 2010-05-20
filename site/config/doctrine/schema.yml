@@ -1,0 +1,305 @@
+options:
+  type: INNODB
+  collate: utf8_unicode_ci
+  charset: utf8
+
+Vertical:
+  actAs:
+    DefaultSort: { column: rank }
+  columns:
+    title: { type: string(255), notnull: true }
+    url:   { type: string(255), notnull: true, unique: true }
+    abbv:  { type: string(5), notnull: true }
+    rank:  { type: integer, notnull: true }
+
+Channel:
+  actAs:
+    DefaultSort: { column: title }
+  columns:
+    vertical_id:    { type: integer, notnull: true }
+    title:          { type: string(255), notnull: true }
+    short_title:    { type: string(255), notnull: true }
+    slug:           { type: string(255), notnull: true, unique: true }
+    settings:       { type: array, notnull: true }
+    content:        { type: clob }
+  relations:
+    Vertical:
+      foreignAlias: Channels
+
+ChannelDetails:
+  columns:
+    channel_id: { type: integer, notnull: true}
+    highlight_title_id: { type: integer, notnull: true }
+    highlight_content: { type: clob, notnull: true}
+    popular1_title_id: { type: integer, notnull: true }
+    popular1_content: { type: clob, notnull: true}
+    popular2_title_id: { type: integer, notnull: true }
+    popular2_content: { type: clob, notnull: true}
+    about_title_id: { type: integer, notnull: true }
+  relations:
+     Channel:
+       local: channel_id
+       foreignType: one
+       foreignAlias: Details
+     Highlight:
+       class: Title
+       local: highlight_title_id
+       autoComplete: false
+     Popular1:
+       class: Title
+       local: popular1_title_id
+       autoComplete: false
+     Popular2:
+       class: Title
+       local: popular2_title_id
+       autoComplete: false
+     AboutChannel:
+       class: Title
+       local: about_title_id
+       autoComplete: false
+
+FeatureArticle:
+  columns:
+    channel_id:  { type: integer }
+    category_id:  { type: integer, notnull: true }
+    article_id:  { type: integer, notnull: true }
+    position:  { type: enum, values: [Above,Below,Right] }
+  relations:
+    Channel:
+      local: channel_id
+      foreign: id
+    Title:
+      local: article_id
+      foreign: id
+
+File:  
+  columns:
+    channel_id:  { type: integer, notnull: true }
+    host:        { type: string(255), notnull: true }
+    path:        { type: string(255), notnull: true }
+    filename:    { type: string(255), notnull: true }   
+    source:      { type: string(255), notnull: true }  
+    permission:  { type: string(255), notnull: true }   
+    description: { type: clob }     
+  relations:
+      Channel:
+        autoComplete: false   
+          
+Image:  
+  columns:
+    channel_id:  { type: integer, notnull: true }
+    host:        { type: string(255), notnull: true }
+    path:        { type: string(255), notnull: true }
+    filename:    { type: string(255), notnull: true }
+    sizes:       { type: array, notnull: true }
+    source:      { type: string(255), notnull: true }
+    source_url:  { type: string(255) }
+    permission:  { type: string(255), notnull: true }
+    description: { type: clob }
+  relations:
+    Channel:
+      autoComplete: false
+
+Title:
+  actAs:
+    Sluggable:
+      unique:    false
+      canUpdate: true
+      builder:   [ltkUrl, generateSlug]
+    DefaultSort: { column: title }
+    Auditable:
+  columns:
+    channel_id:  { type: integer, notnull: true }
+    title:       { type: string(255), notnull: true }
+    slug:        { type: string(255), notnull: true }
+    url:         { type: string(255), notnull: true }
+    type:        { type: enum, values: [Category, Article, Slideshow, Quiz] }
+    status:      { type: enum, values: [Queued, Available, Claimed, InProgress, Submitted, Rejected, Approved, Published, Deleted], default: Queued, notnull: true }
+    published_content_version: { type: integer }
+    notes:       { type: string(255) }
+    available_on:  { type: date }
+    author_user_id: { type: integer(4) }
+    image_id:      { type: integer }
+    image_link:    { type: string(255) }
+    image_text:    { type: string(255) }
+    image_caption: { type: string(255) }
+    image_width:   { type: integer, default: 300 }
+    image_thumbnail:  { type: boolean, default: false }
+  indexes:
+    title:
+      fields: [id, channel_id]
+      type:   unique
+    url:
+      fields: [channel_id, url]
+      type:   unique
+  relations:
+    Channel:
+      autoComplete: false
+    Categories:
+      class:    Category
+      refClass: TitleCategory
+      foreignAlias: Titles
+    sfGuardUser:
+      local: author_user_id
+      foreign: id
+      autoComplete: false
+    Image:
+      local: image_id
+      foreign: id
+      autoComplete: false
+
+Category:
+  actAs:
+    NestedSet:
+      hasManyRoots: true
+      rootColumnName: channel_id
+    Derivative:
+      base: Title
+    Auditable:
+  columns:
+    channel_id: { type: integer, notnull: true }
+    title_id:   { type: integer }
+  indexes:
+    title:
+      fields: [title_id, channel_id]
+      type:   unique
+  relations:
+    Article:
+      local: title_id
+      foreign: title_id
+      autoComplete: false
+    Channel:
+      autoComplete: false
+
+TitleCategory:
+  actAs:
+    Auditable:
+  columns:
+    title_id:    { type: integer, notnull: true, primary: true }
+    category_id: { type: integer, notnull: true, primary: true }
+  relations:
+    Title:
+      foreignAlias: TitleCategories
+      onDelete: CASCADE      
+    Category:
+      autoComplete: false
+
+Article:
+  actAs:
+    Derivative: { base: Title }
+    Auditable:  ~
+  columns:
+    text:       { type: clob, notnull: true }
+    show_home_page: { type: integer(1), notnull: true, default: 0 }
+    related_article_urls: { type: clob }
+  indexes:
+    title:
+      fields: [title_id]
+      type:   unique
+
+Slideshow:
+  actAs:
+    Derivative: { base: Title }
+    Auditable:  ~
+  columns:
+    show_home_page: { type: integer(1), notnull: true, default: 0 }
+
+Slide:
+  actAs:
+    Auditable:
+  columns:
+    slideshow_id: { type: integer, notnull: true }
+    rank:         { type: integer, notnull: true }
+    image_id:     { type: integer, notnull: true }
+    image_link:   { type: string(255) }
+    heading:      { type: string(255) }
+    text:         { type: clob, notnull: true }
+  indexes:
+    rank:
+      fields: [slideshow_id, rank]
+      type:   unique
+  relations:
+    Slideshow:
+      foreignAlias: Slides
+    Image:
+      autoComplete: false
+
+Quiz:
+  actAs:
+    Derivative: { base: Title }
+    Auditable: ~
+  columns:
+    format:             { type: integer(2), notnull: true }
+    message:            { type: string }
+    description1:       { type: string }
+    description2:       { type: string }
+    questions_per_page: { type: integer(2), notnull: true, default: 1 }
+    result_format:      { type: integer(2), notnull: true }
+    result_type:        { type: integer(2), notnull: true }
+    show_accuracy:      { type: boolean, notnull: true, default: true }
+    login_position:     { type: integer(2), notnull: true }
+    login_text:         { type: string }
+    result20:           { type: string }
+    result40:           { type: string }
+    result60:           { type: string }
+    result80:           { type: string }
+    result100:          { type: string }
+
+QuizContent:
+  actAs:
+    Auditable: ~
+  columns:
+    quiz_id:       { type: integer, notnull: true }
+    message:       { type: string, notnull: true }
+    format:        { type: integer(2), notnull: true }
+    image_id:      { type: integer }
+    image_link:    { type: string(255) }
+    is_valid:      { type: boolean, notnull: true }
+    parent_id:     { type: integer, notnull: true, default: 0 }
+    total_count:   { type: integer, notnull: true, default: 0 }
+  indexes:
+    parent:
+      fields: [parent_id]
+  relations:
+    Quiz:
+      foreignAlias: QuizContents
+    Image:
+      autoComplete: false
+
+QuizSession:
+  actAs:
+    Timestampable: ~
+  columns:
+    quiz_id:      { type: integer,     notnull: true }
+    name:         { type: string(255), notnull: true }
+    email:        { type: string(255), notnull: true }
+    ip:           { type: string(20),  notnull: true }
+    agent_string: { type: string(255), notnull: true }
+  relations:
+    Quiz:
+      foreignAlias: Quizzes
+
+UserChannel:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    user_id:    { type: integer,     notnull: true }
+    role_id:    { type: integer(11), notnull: true }
+    channel_id: { type: integer,     notnull: true }
+  indexes:
+    user:
+      fields: [user_id]
+
+Newsletter:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    email: { type: string(255), notnull: true, unique: true }
+    name:  { type: string(255), notnull: true }
+    ip:    { type: string(20),  notnull: true }
+  indexes:
+    email:
+      fields: [email]
+      type:   unique

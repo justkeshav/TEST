@@ -1,0 +1,172 @@
+file:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                File
+    module:               file
+    prefix_path:          /file
+    column:               id
+    with_wildcard_routes: true
+
+channel_details:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                ChannelDetails
+    module:               ChannelDetails
+    prefix_path:          /ChannelDetails
+    column:               channel_id
+    with_wildcard_routes: true
+
+feature_article:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                FeatureArticle
+    module:               FeatureArticle
+    prefix_path:          /FeatureArticle
+    column:               id
+    with_wildcard_routes: true
+    
+sf_guard_user:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sfGuardUser
+    module:               user
+    prefix_path:          /user
+    column:               id
+    with_wildcard_routes: true
+
+article:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Article
+    module:               article
+    prefix_path:          /article
+    column:               id
+    with_wildcard_routes: true
+    
+image_browse:
+  url: /channel/:channel_id/image_browse
+  param: { module: image, action: browse }
+  
+article_browse:
+  url: /channel/:channel_id/article_browse
+  param: { module: ChannelDetails, action: browse }
+
+feature_browse:
+  url: /channel/:channel_id/feature_browse
+  param: { module: FeatureArticle, action: Feature }
+
+category_browse:
+  url: /channel/:channel_id/category_browse
+  param: { module: FeatureArticle, action: Category }
+
+title_category_list:
+  url: /title/categoryList/
+  param: { module: title, action: categoryList }  
+
+title:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Title
+    module:               title
+    prefix_path:          /title
+    column:               id
+    with_wildcard_routes: true
+
+quiz_content:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                QuizContent
+    module:               quiz_content
+    prefix_path:          /quiz/:quiz_id/quiz_content
+    column:               id
+    with_wildcard_routes: true
+
+quiz:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Quiz
+    module:               quiz
+    prefix_path:          /quiz
+    column:               id
+    with_wildcard_routes: true
+        
+slide:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Slide
+    module:               slide
+    prefix_path:          /slideshow/:slideshow_id/slide
+    column:               id
+    with_wildcard_routes: true
+
+slideshow:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Slideshow
+    module:               slideshow
+    prefix_path:          /slideshow
+    column:               id
+    with_wildcard_routes: true
+
+file:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                File
+    module:               file
+    prefix_path:          /channel/:channel_id/file
+    column:               id
+    with_wildcard_routes: true
+        
+image:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Image
+    module:               image
+    prefix_path:          /channel/:channel_id/image
+    column:               id
+    with_wildcard_routes: true
+
+category:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Category
+    module:               category
+    prefix_path:          /category
+    column:               id
+    with_wildcard_routes: true  
+
+channel:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Channel
+    module:               channel
+    prefix_path:          /channel
+    column:               id
+    with_wildcard_routes: true
+
+vertical:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Vertical
+    module:               vertical
+    prefix_path:          /vertical
+    column:               id
+    with_wildcard_routes: true
+    actions:              [ list ]
+
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: default, action: index }
+
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

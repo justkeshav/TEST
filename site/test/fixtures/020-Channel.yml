@@ -1,0 +1,554 @@
+Channel:
+  Channel_1:
+    id: 1
+    Vertical: Vertical_4
+    title: Yoga
+    slug: yoga
+  Channel_2:
+    id: 2
+    Vertical: Vertical_4
+    title: Diet
+    slug: diet
+    short_title: diet
+    settings:
+      analytics_code: UA-1234567-8
+      ad_sidebar: 111111
+      ad_1: 222222
+      ad_2: 333333
+      ad_3: 444444
+      ad_slide: 471969
+      ad_chitika: ''
+      footer_text: 'test'
+      ad_article_size: '468x60'
+      ad_article_type: 'text_image'
+      ad_article_1: 6256262
+      ad_article_2: 626255412
+  Channel_3:
+    id: 3
+    Vertical: Vertical_2
+    title: Movies
+    slug: movies
+  Channel_4:
+    id: 4
+    Vertical: Vertical_5
+    title: HomeImprovement
+    slug: homeimprovement
+  Channel_5:
+    id: 5
+    Vertical: Vertical_5
+    title: Antiques
+    slug: antiques
+  Channel_6:
+    id: 6
+    Vertical: Vertical_3
+    title: Baby
+    slug: baby
+  Channel_7:
+    id: 7
+    Vertical: Vertical_3
+    title: Cats
+    slug: cats
+  Channel_8:
+    id: 8
+    Vertical: Vertical_3
+    title: Addiction
+    slug: addiction
+  Channel_9:
+    id: 9
+    Vertical: Vertical_6
+    title: Buy
+    slug: buy
+  Channel_10:
+    id: 10
+    Vertical: Vertical_6
+    title: Cellphones
+    slug: cellphones
+  Channel_11:
+    id: 11
+    Vertical: Vertical_5
+    title: Christmas
+    slug: christmas
+  Channel_12:
+    id: 12
+    Vertical: Vertical_3
+    title: College
+    slug: college
+  Channel_13:
+    id: 13
+    Vertical: Vertical_5
+    title: Costumes
+    slug: costumes
+  Channel_14:
+    id: 14
+    Vertical: Vertical_1
+    title: Creditcards
+    slug: creditcards
+  Channel_15:
+    id: 15
+    Vertical: Vertical_8
+    title: Cruises
+    slug: cruises
+  Channel_16:
+    id: 16
+    Vertical: Vertical_3
+    title: Dating
+    slug: dating
+  Channel_17:
+    id: 17
+    Vertical: Vertical_3
+    title: Divorce
+    slug: divorce
+  Channel_18:
+    id: 18
+    Vertical: Vertical_3
+    title: Dogs
+    slug: dogs
+  Channel_19:
+    id: 19
+    Vertical: Vertical_5
+    title: Garden
+    slug: garden
+  Channel_20:
+    id: 20
+    Vertical: Vertical_2
+    title: Scrapbooking
+    slug: scrapbooking
+  Channel_21:
+    id: 21
+    Vertical: Vertical_5
+    title: Organic
+    slug: organic
+  Channel_22:
+    id: 22
+    Vertical: Vertical_8
+    title: Themeparks
+    slug: themeparks
+  Channel_23:
+    id: 23
+    Vertical: Vertical_8
+    title: Camping
+    slug: camping
+  Channel_24:
+    id: 24
+    Vertical: Vertical_8
+    title: SanFrancisco
+    slug: sanfrancisco
+  Channel_25:
+    id: 25
+    Vertical: Vertical_7
+    title: Handbags
+    slug: handbags
+  Channel_26:
+    id: 26
+    Vertical: Vertical_1
+    title: Insurance
+    slug: insurance
+  Channel_27:
+    id: 27
+    Vertical: Vertical_5
+    title: InteriorDesign
+    slug: interiordesign
+  Channel_28:
+    id: 28
+    Vertical: Vertical_7
+    title: Lingerie
+    slug: lingerie
+  Channel_29:
+    id: 29
+    Vertical: Vertical_4
+    title: Hair
+    slug: hair
+    settings:
+      analytics_code: UA-1905969-5
+      ad_sidebar: 288413
+      ad_1: 288411
+      ad_2: 376215
+      ad_3: 316030
+      ad_article_size: '300x250'
+      ad_article_type: 'image'
+      ad_article_1: 541541
+      ad_article_2: 545111
+      ad_slide: 471969
+      ad_chitika: 755234
+  Channel_30:
+    id: 30
+    Vertical: Vertical_3
+    title: Safety
+    slug: safety
+  Channel_31:
+    id: 31
+    Vertical: Vertical_6
+    title: Online
+    slug: online
+  Channel_32:
+    id: 32
+    Vertical: Vertical_5
+    title: Party
+    slug: party
+  Channel_33:
+    id: 33
+    Vertical: Vertical_1
+    title: Mortgage
+    slug: mortgage
+  Channel_34:
+    id: 34
+    Vertical: Vertical_2
+    title: Sci-Fi
+    slug: sci-fi
+    settings:
+      analytics_code: UA-2328246-8
+      ad_sidebar: 290690
+      ad_1: 289691
+      ad_2: 376179
+      ad_3: 315991
+      ad_slide: 471969
+      ad_chitika: ''
+      ad_article_size: '468x60'
+      ad_article_type: 'text_image'
+      ad_article_1: 6256262
+      ad_article_2: 626255412
+  Channel_35:
+    id: 35
+    Vertical: Vertical_7
+    title: Sunglasses
+    slug: sunglasses
+  Channel_36:
+    id: 36
+    Vertical: Vertical_4
+    title: Skincare
+    slug: skincare
+  Channel_37:
+    id: 37
+    Vertical: Vertical_3
+    title: Seniors
+    slug: seniors
+  Channel_38:
+    id: 38
+    Vertical: Vertical_8
+    title: Travel
+    slug: travel
+  Channel_39:
+    id: 39
+    Vertical: Vertical_3
+    title: Teens
+    slug: teens
+  Channel_40:
+    id: 40
+    Vertical: Vertical_1
+    title: Save
+    slug: save
+  Channel_41:
+    id: 41
+    Vertical: Vertical_2
+    title: Celebrity
+    slug: celebrity
+  Channel_42:
+    id: 42
+    Vertical: Vertical_1
+    title: Business
+    slug: business
+  Channel_43:
+    id: 43
+    Vertical: Vertical_5
+    title: Wine
+    slug: wine
+  Channel_44:
+    id: 44
+    Vertical: Vertical_7
+    title: Jewelry
+    slug: jewelry
+  Channel_45:
+    id: 45
+    Vertical: Vertical_7
+    title: Watches
+    slug: watches
+  Channel_46:
+    id: 46
+    Vertical: Vertical_2
+    title: VideoGames
+    slug: videogames
+  Channel_47:
+    id: 47
+    Vertical: Vertical_7
+    title: Plussize
+    slug: plussize
+  Channel_48:
+    id: 48
+    Vertical: Vertical_3
+    title: Kids
+    slug: kids
+  Channel_49:
+    id: 49
+    Vertical: Vertical_4
+    title: Makeup
+    slug: makeup
+  Channel_50:
+    id: 50
+    Vertical: Vertical_2
+    title: Music
+    slug: music
+  Channel_51:
+    id: 51
+    Vertical: Vertical_4
+    title: Pregnancy
+    slug: pregnancy
+  Channel_52:
+    id: 52
+    Vertical: Vertical_7
+    title: Shoes
+    slug: shoes
+  Channel_53:
+    id: 53
+    Vertical: Vertical_7
+    title: Swimsuits
+    slug: swimsuits
+  Channel_54:
+    id: 54
+    Vertical: Vertical_4
+    title: Tattoos
+    slug: tattoos
+  Channel_55:
+    id: 55
+    Vertical: Vertical_2
+    title: Best
+    slug: best
+  Channel_56:
+    id: 56
+    Vertical: Vertical_2
+    title: Crafts
+    slug: crafts
+  Channel_57:
+    id: 57
+    Vertical: Vertical_5
+    title: Weddings
+    slug: weddings
+  Channel_58:
+    id: 58
+    Vertical: Vertical_7
+    title: EngagementRings
+    slug: engagementrings
+  Channel_59:
+    id: 59
+    Vertical: Vertical_5
+    title: Recipes
+    slug: recipes
+  Channel_60:
+    id: 60
+    Vertical: Vertical_2
+    title: Boardgames
+    slug: boardgames
+  Channel_61:
+    id: 61
+    Vertical: Vertical_3
+    title: Horoscopes
+    slug: horoscopes
+  Channel_62:
+    id: 62
+    Vertical: Vertical_5
+    title: Greenliving
+    slug: greenliving
+  Channel_63:
+    id: 63
+    Vertical: Vertical_3
+    title: Dying
+    slug: dying
+  Channel_64:
+    id: 64
+    Vertical: Vertical_2
+    title: Dance
+    slug: dance
+  Channel_65:
+    id: 65
+    Vertical: Vertical_4
+    title: Stress
+    slug: stress
+  Channel_66:
+    id: 66
+    Vertical: Vertical_7
+    title: Mens-Fashion
+    slug: mens-fashion
+  Channel_67:
+    id: 67
+    Vertical: Vertical_1
+    title: Jobs
+    slug: jobs
+  Channel_68:
+    id: 68
+    Vertical: Vertical_6
+    title: SocialNetworking
+    slug: socialnetworking
+  Channel_69:
+    id: 69
+    Vertical: Vertical_4
+    title: Herbs
+    slug: herbs
+  Channel_70:
+    id: 70
+    Vertical: Vertical_6
+    title: Web-Design
+    slug: web-design
+  Channel_71:
+    id: 71
+    Vertical: Vertical_4
+    title: Exercise
+    slug: exercise
+  Channel_72:
+    id: 72
+    Vertical: Vertical_2
+    title: Guitar
+    slug: guitar
+  Channel_73:
+    id: 73
+    Vertical: Vertical_5
+    title: Candles
+    slug: candles
+  Channel_74:
+    id: 74
+    Vertical: Vertical_4
+    title: Vitamins
+    slug: vitamins
+  Channel_75:
+    id: 75
+    Vertical: Vertical_2
+    title: Cheerleading
+    slug: cheerleading
+  Channel_76:
+    id: 76
+    Vertical: Vertical_2
+    title: Paranormal
+    slug: paranormal
+  Channel_77:
+    id: 77
+    Vertical: Vertical_7
+    title: Womens-Fashion
+    slug: womens-fashion
+  Channel_78:
+    id: 78
+    Vertical: Vertical_2
+    title: Soap-Operas
+    slug: soap-operas
+  Channel_79:
+    id: 79
+    Vertical: Vertical_1
+    title: Freelance-Writing
+    slug: freelance-writing
+  Channel_80:
+    id: 80
+    Vertical: Vertical_3
+    title: Feng-Shui
+    slug: feng-shui
+  Channel_81:
+    id: 81
+    Vertical: Vertical_4
+    title: Autism
+    slug: autism
+  Channel_82:
+    id: 82
+    Vertical: Vertical_4
+    title: Sleep
+    slug: sleep
+  Channel_83:
+    id: 83
+    Vertical: Vertical_3
+    title: French
+    slug: french
+  Channel_84:
+    id: 84
+    Vertical: Vertical_2
+    title: Reality-TV
+    slug: reality-tv
+  Channel_85:
+    id: 85
+    Vertical: Vertical_3
+    title: Charity
+    slug: charity
+  Channel_86:
+    id: 86
+    Vertical: Vertical_2
+    title: Photography
+    slug: photography
+  Channel_87:
+    id: 87
+    Vertical: Vertical_5
+    title: Cleaning
+    slug: cleaning
+  Channel_88:
+    id: 88
+    Vertical: Vertical_3
+    title: Home-School
+    slug: home-school
+  Channel_89:
+    id: 89
+    Vertical: Vertical_3
+    title: Vegetarian
+    slug: vegetarian
+  Channel_90:
+    id: 90
+    Vertical: Vertical_2
+    title: Ski
+    slug: ski
+  Channel_91:
+    id: 91
+    Vertical: Vertical_2
+    title: Origami
+    slug: origami
+  Channel_92:
+    id: 92
+    Vertical: Vertical_5
+    title: Furniture
+    slug: furniture
+  Channel_93:
+    id: 93
+    Vertical: Vertical_5
+    title: Gourmet
+    slug: gourmet
+  Channel_94:
+    id: 94
+    Vertical: Vertical_2
+    title: Quiz
+    slug: quiz
+  Channel_95:
+    id: 95
+    Vertical: Vertical_3
+    title: Cars
+    slug: cars
+  Channel_96:
+    id: 96
+    Vertical: Vertical_7
+    title: Childrens-Clothing
+    slug: childrens-clothing
+  Channel_97:
+    id: 97
+    Vertical: Vertical_5
+    title: Bedding
+    slug: bedding
+  Channel_98:
+    id: 98
+    Vertical: Vertical_2
+    title: Toys
+    slug: toys
+  Channel_99:
+    id: 99
+    Vertical: Vertical_7
+    title: Uniforms
+    slug: uniforms
+  Channel_100:
+    id: 100
+    Vertical: Vertical_5
+    title: Cake-Decorating
+    slug: cake-decorating
+  Channel_101:
+    id: 101
+    Vertical: Vertical_3
+    title: Childrens-Books
+    slug: childrens-books
+  Channel_102:
+    id: 102
+    Vertical: Vertical_3
+    title: Genealogy
+    slug: genealogy
+  Channel_103:
+    id: 103
+    Vertical: Vertical_5
+    title: Cocktails
+    slug: cocktails

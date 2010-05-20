@@ -1,0 +1,47 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           sfGuardUser
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          sf_guard_user
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        username:         { help:  Username must be at least 4 characters }
+        password:         { help:  'Password must be 8 or more characters, and contain 1 or more numerals', attributes: { autocomplete: off } }
+        password2:        { label: Retype Password }      
+        is_active:        { label: Active }
+        is_super_admin:   { label: Admin, attributes: { onchange: toggleRoleWidgets() } }
+        groups_list:      { label: Role, attributes: { onchange: toggleRoleWidgets(); } }
+        permissions_list: { label: Editor Level }
+        editor_channels:  { help:  Channels user is Editor for (hold down the [CTRL] key to select multiple channels), is_real: true }
+        writer_channels:  { help:  Channels user is Writer for (hold down the [CTRL] key to select multiple channels), is_real: true }
+      list:
+        display: [id, username, _role, is_active]
+      filter:
+        fields:
+          username: { help: ''}
+        display: [username, is_active, is_super_admin, created_at]
+      form:    ~
+      edit:    
+        title: Editing User '%%username%%'
+        fields:
+          password: { label: Change Password }
+        display:
+          NONE:        [username, password, password2, is_active, is_super_admin, groups_list]
+          Permissions: [permissions_list, editor_channels, writer_channels]
+          Info:        [last_login, created_at, updated_at]
+        actions:
+          _list: ~
+          _save: ~          
+      new:
+        display: 
+          NONE:        [username, password, password2, is_active, is_super_admin, groups_list]
+          Permissions: [permissions_list, editor_channels, writer_channels]

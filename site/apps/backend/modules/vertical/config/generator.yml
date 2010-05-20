@@ -1,0 +1,37 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Vertical
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          vertical
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        url:         { label: URL }
+      list:
+        title:   Verticals
+        display: [_title, _url]
+        actions: {}
+        object_actions: {}
+        batch_actions: {}
+      filter: { class: false }
+      form:    ~
+
+      # disable the edit and new screens
+      edit:
+        title: ''
+        display:
+          NONE: []
+        actions: { _list: ~ }
+      new:
+        title: ''
+        display:
+          NONE: []
+        actions: { _list: ~ }

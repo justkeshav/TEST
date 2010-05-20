@@ -1,0 +1,26 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+all:
+  host: ${web.host}
+  static_host: ${web.host.static}
+  static_cache: ${web.cache.static}
+  web_server:
+    group: ${web.user.group}
+  image_provider:
+    class: ${provider.image}
+    host: ${provider.image.host}
+    bucket: ${provider.image.bucket}
+    access_key: '${aws.key.access}'
+    secret_key: '${aws.key.secret}'
+  query_cache_provider:
+    class: ${provider.cache.query}
+  result_cache_provider:
+    class: ${provider.cache.result}
+    lifespan: ${provider.cache.result.lifespan}
+  file_provider:
+    class: ${provider.file}
+    host: ${provider.file.host}
+    bucket: ${provider.file.bucket}
+    access_key: '${aws.key.access}'
+    secret_key: '${aws.key.secret}'

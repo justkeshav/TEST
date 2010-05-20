@@ -1,0 +1,48 @@
+QuizVersion:
+  QuizVersion_1_1:
+    id: 10
+    Quiz: Quiz_1
+    format: '1'
+    message: 'Fitness Expert Tom Gilliam, author of Move It. Lose It. Live Healthy, says "Successful weight management is really about […] rejecting the myths and making conscious choices every day."'
+    description1: 'This quiz will test your knowledge about what''s healthy and what''s not. Is your dieting knowledge based on fact or myth?'
+    description2: ''
+    questions_per_page: '1'
+    result_format: '3'
+    result_type: '1'
+    show_accuracy: true
+    login_position: '1'
+    login_text: ''
+    result20: ''
+    result40: ''
+    result60: 'You need to be more careful with what you eat.'
+    result80: ''
+    result100: ''
+    title_id: 10656
+    created_at: '2010-03-15 23:19:34'
+    updated_at: '2010-03-15 23:19:34'
+    created_by: null
+    updated_by: null
+    version: '1'
+  QuizVersion_2_1:
+    id: 11
+    format: '1'
+    message: 'Thanks for taking our fast food survey. If you found facts here that surprised you, then you might want to spend time looking at the nutritional information from your favorite fast food joints. Most make the information freely available on their website or offer pamphlets with nutrition facts.'
+    description1: 'How much do you really know about fast food? The food we choose on a daily basis has a huge effect on our lives and our health. Fast food has become a convenient way to feed ourselves and our families in an increasingly busy society. But at what cost to our health? Take our fast food survey and find out.'
+    description2: ''
+    questions_per_page: '1'
+    result_format: '2'
+    result_type: '1'
+    show_accuracy: true
+    login_position: '2'
+    login_text: ''
+    result20: ''
+    result40: ''
+    result60: ''
+    result80: ''
+    result100: ''
+    title_id: 10657
+    created_at: '2010-03-16 14:34:12'
+    updated_at: '2010-03-16 14:34:12'
+    created_by: null
+    updated_by: null
+    version: '1'

@@ -1,0 +1,30 @@
+generator:
+  class: ltksfDoctrineGenerator
+  param:
+    model_class:           Image
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          image
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+    parent:                { model: Channel }
+
+    config:
+      actions: ~
+      fields:
+        upload:     { label: Image }
+        source_url: { label: Source URL }
+      list:
+        title:   Images
+        display: [_thumb, _links]
+      filter:  ~
+      form:   { class: BackendImageForm }
+      edit:
+        display:
+          NONE: [thumb, links, permission, source, source_url, description]
+      new:
+        display:
+          NONE: [upload, permission, source, source_url, description]

@@ -1,0 +1,44 @@
+generator:
+  class: ltksfDoctrineGenerator
+  param:
+    model_class:           Article
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          article
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        title_id: { label: Title }
+      list:
+        title: Articles
+        display: [=Title]
+      filter:  { class: false }
+      form:
+        derivative_base_class: EmbeddedBackendTitleForm
+        class: BackendArticleForm
+      edit:
+        title: Edit Article '%%title%%'
+        display:
+          NONE: [Title]
+          Content: [text, show_home_page]
+        actions:
+          _list:    ~
+          _history: ~               
+          preview:  ~
+          _save:    ~
+      new:
+        title: New Article '%%title%%'
+        display:
+          NONE: [Title]
+          Content: [text]    
+        actions:
+          _list:    ~
+          _save:    ~   
+      history: ~
+      show: ~

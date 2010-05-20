@@ -1,0 +1,219 @@
+CategoryVersion:
+  CategoryVersion_42_1:
+    Category: Category_42
+    channel_id: '34'
+    title_id: '40'
+    lft: null
+    rgt: null
+    level: null
+    created_at: '2005-10-01 23:56:36'
+    updated_at: '2009-10-21 01:50:21'
+    created_by: null
+    updated_by: null
+    version: '1'
+  CategoryVersion_42_2:
+    Category: Category_42
+    channel_id: '34'
+    title_id: '40'
+    lft: '2'
+    rgt: '3'
+    level: '1'
+    created_at: '2005-10-01 23:56:36'
+    updated_at: '2010-03-04 19:52:27'
+    created_by: null
+    updated_by: null
+    version: '2'
+  CategoryVersion_55_1:
+    Category: Category_55
+    id: 55
+    channel_id: '34'
+    title_id: null
+    lft: null
+    rgt: null
+    level: null
+    created_at: '2010-04-06 17:03:02'
+    updated_at: '2010-04-06 17:03:02'
+    created_by: null
+    updated_by: null
+    version: '1'
+  CategoryVersion_55_2:
+    Category: Category_55
+    id: 55
+    channel_id: '34'
+    title_id: null
+    lft: '1'
+    rgt: '30'
+    level: '0'
+    created_at: '2010-04-06 17:03:02'
+    updated_at: '2010-04-06 17:03:02'
+    created_by: null
+    updated_by: null
+    version: '2'
+  CategoryVersion_46_1:
+    Category: Category_46
+    channel_id: '34'
+    title_id: '44'
+    lft: null
+    rgt: null
+    level: null
+    created_at: '2005-10-03 03:07:59'
+    updated_at: '2009-10-21 04:32:23'
+    created_by: null
+    updated_by: null
+    version: '1'
+  CategoryVersion_46_2:
+    Category: Category_46
+    channel_id: '34'
+    title_id: '44'
+    lft: '2'
+    rgt: '3'
+    level: '1'
+    created_at: '2005-10-03 03:07:59'
+    updated_at: '2010-03-04 19:52:27'
+    created_by: null
+    updated_by: null
+    version: '2'
+  CategoryVersion_27_1:
+    Category: Category_27
+    channel_id: '29'
+    title_id: '26'
+    lft: null
+    rgt: null
+    level: null
+    created_at: '2006-08-09 15:55:20'
+    updated_at: '2009-01-15 04:46:31'
+    created_by: null
+    updated_by: null
+    version: '1'
+  CategoryVersion_27_2:
+    Category: Category_27
+    channel_id: '29'
+    title_id: '26'
+    lft: '2'
+    rgt: '3'
+    level: '1'
+    created_at: '2006-08-09 15:55:20'
+    updated_at: '2010-03-04 19:52:23'
+    created_by: null
+    updated_by: null
+    version: '2'
+  CategoryVersion_33_1:
+    Category: Category_33
+    channel_id: '29'
+    title_id: '32'
+    lft: null
+    rgt: null
+    level: null
+    created_at: '2008-06-10 15:40:30'
+    updated_at: '2008-06-10 15:44:53'
+    created_by: null
+    updated_by: null
+    version: '1'
+  CategoryVersion_33_2:
+    Category: Category_33
+    channel_id: '29'
+    title_id: '32'
+    lft: '2'
+    rgt: '3'
+    level: '1'
+    created_at: '2008-06-10 15:40:30'
+    updated_at: '2010-03-04 19:52:23'
+    created_by: null
+    updated_by: null
+    version: '2'
+  CategoryVersion_21_1:
+    Category: Category_21
+    channel_id: '29'
+    title_id: '20'
+    lft: null
+    rgt: null
+    level: null
+    created_at: '2006-04-12 04:32:36'
+    updated_at: '2010-01-04 01:02:21'
+    created_by: null
+    updated_by: null
+    version: '1'
+  CategoryVersion_21_2:
+    Category: Category_21
+    channel_id: '29'
+    title_id: '20'
+    lft: '2'
+    rgt: '3'
+    level: '1'
+    created_at: '2006-04-12 04:32:36'
+    updated_at: '2010-03-04 19:52:23'
+    created_by: null
+    updated_by: null
+    version: '2'
+  CategoryVersion_31_1:
+    Category: Category_31
+    channel_id: '29'
+    title_id: '30'
+    lft: null
+    rgt: null
+    level: null
+    created_at: '2007-05-24 18:46:51'
+    updated_at: '2007-05-24 18:46:51'
+    created_by: null
+    updated_by: null
+    version: '1'
+  CategoryVersion_31_2:
+    Category: Category_31
+    channel_id: '29'
+    title_id: '30'
+    lft: '2'
+    rgt: '3'
+    level: '1'
+    created_at: '2007-05-24 18:46:51'
+    updated_at: '2010-03-04 19:52:23'
+    created_by: null
+    updated_by: null
+    version: '2'
+  CategoryVersion_43_1:
+    Category: Category_43
+    channel_id: '34'
+    title_id: '41'
+    lft: null
+    rgt: null
+    level: null
+    created_at: '2005-10-02 01:21:59'
+    updated_at: '2009-10-21 00:42:05'
+    created_by: null
+    updated_by: null
+    version: '1'
+  CategoryVersion_43_2:
+    Category: Category_43
+    channel_id: '34'
+    title_id: '41'
+    lft: '2'
+    rgt: '3'
+    level: '1'
+    created_at: '2005-10-02 01:21:59'
+    updated_at: '2010-03-04 19:52:26'
+    created_by: null
+    updated_by: null
+    version: '2'
+  CategoryVersion_6_1:
+    Category: Category_6
+    channel_id: '2'
+    title_id: '6'
+    lft: null
+    rgt: null
+    level: null
+    created_at: '2005-06-14 03:34:38'
+    updated_at: '2009-10-22 03:24:54'
+    created_by: null
+    updated_by: null
+    version: '1'
+  CategoryVersion_6_2:
+    Category: Category_6
+    channel_id: '2'
+    title_id: '6'
+    lft: '2'
+    rgt: '3'
+    level: '1'
+    created_at: '2005-06-14 03:34:38'
+    updated_at: '2010-03-15 22:41:27'
+    created_by: null
+    updated_by: null
+    version: '2'

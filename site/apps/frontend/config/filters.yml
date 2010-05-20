@@ -1,0 +1,15 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/12-Filters
+
+rendering: ~
+security:  ~
+
+# this filter must come just after security
+static_cache: {class: staticCacheFilter}
+
+# insert your own filters here
+analytics:      {class: analyticsFilter}
+static_content: {class: staticContentFilter}
+
+cache:     ~
+execution: ~

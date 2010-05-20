@@ -1,0 +1,6 @@
+CREATE TABLE article_version (id BIGINT, text LONGTEXT NOT NULL, title_id BIGINT,show_home_page tinyint not null default 0, related_article_urls LONGTEXT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, created_by INT, updated_by INT, version BIGINT, PRIMARY KEY(id, version)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = INNODB;
+CREATE TABLE article (id BIGINT AUTO_INCREMENT, text LONGTEXT NOT NULL, title_id BIGINT, show_home_page tinyint not null default 0, related_article_urls LONGTEXT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, created_by INT, updated_by INT, version BIGINT, UNIQUE INDEX title_idx (title_id), INDEX created_by_idx (created_by), INDEX updated_by_idx (updated_by), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = INNODB;
+ALTER TABLE article_version ADD CONSTRAINT article_version_id_article_id FOREIGN KEY (id) REFERENCES article(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE article ADD CONSTRAINT article_title_id_title_id FOREIGN KEY (title_id) REFERENCES title(id);
+ALTER TABLE article ADD CONSTRAINT article_created_by_sf_guard_user_id FOREIGN KEY (created_by) REFERENCES sf_guard_user(id);
+-- //@UNDO

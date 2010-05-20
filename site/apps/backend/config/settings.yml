@@ -1,0 +1,20 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/04-Settings
+
+prod:
+  .settings:
+    no_script_name:         true
+
+all:
+  .settings:
+
+    # Form security secret (CSRF protection)
+    csrf_secret:            644ac05c724239b75d11897849f2dca1018be4a6
+
+    enabled_modules: [default, sfGuardAuth, sfGuardGroup, sfGuardPermission, sfGuardUser]
+
+    check_lock: true
+
+  .actions:
+    login_module:    sfGuardAuth
+    login_action:    signin

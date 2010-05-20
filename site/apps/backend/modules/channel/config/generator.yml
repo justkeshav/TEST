@@ -1,0 +1,64 @@
+# The auto-generated versions of indexSuccess.php and editSuccess.php has been overridden
+# to make a minor change to the h1 text. If you make any changes here please check for any
+# changes to those auto-generated files.
+
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Channel
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          channel
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        short_title: { label: Short Title }
+        settings_analytics_code: { label: GA Code }
+        settings_ad_1:     { label: Ad Code 1 }
+        settings_ad_2:  { label: Ad Code 2 }
+        settings_ad_3:  { label: Ad Code 3 }
+        settings_ad_slide:  { label: Slide Ad Code }
+        settings_ad_article_size: { label: Article Ad Size }
+        settings_ad_article_type: { label: Article Ad Type }
+        settings_ad_article_1: { label: Article Ad Code 1 }
+        settings_ad_article_2: { label: Article Ad Code 2 }
+        settings_ad_sidebar: { label: Sidebar Ad Code }
+        settings_ad_chitika: { label: Chitika Ad Code }
+        settings_footer_text: { label: Footer Link Text }
+      list:
+        title: Channels
+        display: [title, _url]
+        max_per_page: 25
+        actions: {}
+        object_actions:
+          _edit: ~
+        batch_actions: {}
+      filter: { class: false }
+      form:
+        class: BackendChannelForm
+      edit:
+        title: %%title%%
+        display:
+          NONE:     [vertical_id, title, short_title, slug, content]
+          Settings:
+            - settings_footer_text
+            - settings_analytics_code
+            - settings_ad_1
+            - settings_ad_2
+            - settings_ad_3
+            - settings_ad_article_size
+            - settings_ad_article_type
+            - settings_ad_article_1
+            - settings_ad_article_2
+            - settings_ad_sidebar
+            - settings_ad_slide
+            - settings_ad_chitika
+          Content:  [_categories, _slideshows, _quizzes, _featurearticle, _channeldetails, _files, _images]
+          Users:    [channel_writers]
+      new: ~

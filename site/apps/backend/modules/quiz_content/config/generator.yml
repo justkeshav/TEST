@@ -1,0 +1,38 @@
+generator:
+  class: ltksfDoctrineGenerator
+  param:
+    model_class:           QuizContent
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          quiz_content
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+    parent:                { model: Quiz }
+
+    config:
+      actions: ~
+      fields: 
+        message:       { label: Question }
+        question_type: { label: Question Type }
+      list:    
+        title: Questions 
+        display: [=id, =message] 
+      filter: 
+        fields:
+          message: { label: Keyword }
+        display: [message]
+      form: { class: BackendQuizContentForm }
+      edit:
+        title: Edit Question '%%message%%' 
+        display:
+          NONE: [message, format, image_id, image_link]
+          Answers: [answer1, answer1_response, answer1_valid, answer2, answer2_response, answer2_valid, answer3, answer3_response, answer3_valid, answer4, answer4_response, answer4_valid, answer5, answer5_response, answer5_valid, answer6, answer6_response, answer6_valid, answer7, answer7_response, answer7_valid, answer8, answer8_response, answer8_valid, answer9, answer9_response, answer9_valid, answer10, answer10_response, answer10_valid]
+          Info: [created_at, updated_at]
+      new:
+        title: New Question    
+        display:
+          NONE: [message, format, image_id, image_link]
+          Answers: [answer1, answer1_response, answer1_valid, answer2, answer2_response, answer2_valid, answer3, answer3_response, answer3_valid, answer4, answer4_response, answer4_valid, answer5, answer5_response, answer5_valid, answer6, answer6_response, answer6_valid, answer7, answer7_response, answer7_valid, answer8, answer8_response, answer8_valid, answer9, answer9_response, answer9_valid, answer10, answer10_response, answer10_valid]

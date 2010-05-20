@@ -1,0 +1,46 @@
+# The auto-generated versions of indexSuccess.php and editSuccess.php has been overridden
+# to make a minor change to the h1 text. If you make any changes here please check for any
+# changes to those auto-generated files.
+
+generator:
+  class: ltksfDoctrineGenerator
+  param:
+    model_class:           Slideshow
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          slideshow
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        title_id: { label: Title }
+      list:
+        title: Slideshows
+        display: [=Title, _url]
+        actions: {}
+      filter:  ~
+      form:
+        class: BackendSlideshowForm
+      new:
+        title: New Slideshow '%%title%%'
+        display:
+          NONE: [Title]
+        actions:
+          _list:    ~
+          _save:    { label: Create }
+      edit:
+        title: Edit Slideshow '%%title%%'
+        display:
+          NONE: [Title,show_home_page]
+          Content: [_slides]
+        actions:
+          _list:    ~
+          _history: ~
+          _save:    ~
+      history: ~
+      show: ~

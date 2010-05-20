@@ -1,0 +1,15 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+channel:
+  url:     /
+  class:   ltkRoute
+  param:   { module: channel, action: show }
+
+content:
+  url:     /:url~:page
+  class:   ltkFullUrlDoctrineRoute
+  options: { model: Title, type: object, method: findOneByUrl, segment_separators: ['~'], extra_parameters_as_query_string: true }
+  param:   { module: common, action: showContent, page: 0 }
+  requirements:
+    sf_method: [get,post]    

@@ -1,0 +1,14 @@
+CREATE TABLE slide_version (id BIGINT, slideshow_id BIGINT NOT NULL, rank BIGINT NOT NULL, image_id BIGINT NOT NULL, image_link VARCHAR(255), heading VARCHAR(255), text LONGTEXT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, created_by INT, updated_by INT, version BIGINT, PRIMARY KEY(id, version)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = INNODB;
+CREATE TABLE slide (id BIGINT AUTO_INCREMENT, slideshow_id BIGINT NOT NULL, rank BIGINT NOT NULL, image_id BIGINT NOT NULL, image_link VARCHAR(255), heading VARCHAR(255), text LONGTEXT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, created_by INT, updated_by INT, version BIGINT, UNIQUE INDEX rank_idx (slideshow_id, rank), INDEX slideshow_id_idx (slideshow_id), INDEX image_id_idx (image_id), INDEX created_by_idx (created_by), INDEX updated_by_idx (updated_by), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = INNODB;
+CREATE TABLE slideshow_version (id BIGINT, title_id BIGINT,show_home_page tinyint not null default 0, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, created_by INT, updated_by INT, version BIGINT, PRIMARY KEY(id, version)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = INNODB;
+CREATE TABLE slideshow (id BIGINT AUTO_INCREMENT, title_id BIGINT, created_at DATETIME NOT NULL,show_home_page tinyint not null default 0, updated_at DATETIME NOT NULL, created_by INT, updated_by INT, version BIGINT, INDEX title_id_idx (title_id), INDEX created_by_idx (created_by), INDEX updated_by_idx (updated_by), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = INNODB;
+ALTER TABLE slide_version ADD CONSTRAINT slide_version_id_slide_id FOREIGN KEY (id) REFERENCES slide(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE slide ADD CONSTRAINT slide_updated_by_sf_guard_user_id FOREIGN KEY (updated_by) REFERENCES sf_guard_user(id);
+ALTER TABLE slide ADD CONSTRAINT slide_slideshow_id_slideshow_id FOREIGN KEY (slideshow_id) REFERENCES slideshow(id);
+ALTER TABLE slide ADD CONSTRAINT slide_image_id_image_id FOREIGN KEY (image_id) REFERENCES image(id);
+ALTER TABLE slide ADD CONSTRAINT slide_created_by_sf_guard_user_id FOREIGN KEY (created_by) REFERENCES sf_guard_user(id);
+ALTER TABLE slideshow_version ADD CONSTRAINT slideshow_version_id_slideshow_id FOREIGN KEY (id) REFERENCES slideshow(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE slideshow ADD CONSTRAINT slideshow_updated_by_sf_guard_user_id FOREIGN KEY (updated_by) REFERENCES sf_guard_user(id);
+ALTER TABLE slideshow ADD CONSTRAINT slideshow_title_id_title_id FOREIGN KEY (title_id) REFERENCES title(id);
+ALTER TABLE slideshow ADD CONSTRAINT slideshow_created_by_sf_guard_user_id FOREIGN KEY (created_by) REFERENCES sf_guard_user(id);
+-- //@UNDO

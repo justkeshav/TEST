@@ -1,0 +1,60 @@
+generator:
+  class: ltksfDoctrineGenerator
+  param:
+    model_class:           Title
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          title
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        url: { label: URL }
+        categories_list: { label: Categories, help: Hold down the [CTRL] key to select multiple categories, is_real: true }
+        channel_id: { attributes: { onchange: changeCategoriesList(); } }           
+        type: { attributes: { onchange: toggleCategoriesList(); } }       
+        author_user_id: { label: Author }
+      list:
+        title: Titles
+        display: [=title, _url, type, status]
+        object_actions:
+          _edit: { credentials: [['Group Editor', 'Site Editor', 'Titler', 'Premium Writer', 'Reliable Writer', 'Novice Writer']] }
+          edit_content: { label: Edit Content, credentials: [['Group Editor', 'Site Editor', 'Premium Writer', 'Reliable Writer', 'Novice Writer']] }
+          _delete: { credentials: [['Group Editor', 'Titler']]  }
+        batch_actions:
+          activate: { label: Activate, action: activate, credentials: [['Group Editor']] }
+          claim: { label: Claim, action: claim, credentials: [['Group Editor', 'Site Editor', 'Premium Writer', 'Reliable Writer', 'Novice Writer']]  }
+          unclaim: { label: Unclaim, action: unclaim, credentials: [['Group Editor', 'Site Editor', 'Premium Writer', 'Reliable Writer', 'Novice Writer']]  }          
+        actions:
+          _new: { credentials: [['Group Editor', 'Titler']] }
+      filter:
+        display: [title, channel_id, type, status, author_user_id, created_at, updated_at, created_by, updated_by] 
+      form:
+        class: BackendTitleForm     
+      edit:
+        title: Edit Title '%%title%%'
+        display:
+          NONE: [type, title, slug, url, channel_id, author_user_id, categories_list, _categoryListJavascript, notes] 
+          Image: [image_id, image_link, image_text, image_caption, image_width, image_thumbnail] 
+        actions:     
+          _delete: ~
+          _list:    ~
+          _history: ~
+          activate: { label: Activate, action: activate, credentials: [['Group Editor']] }
+          claim: { label: Claim, action: claim, credentials: [['Premium Writer', 'Reliable Writer', 'Novice Writer']] }          
+          _save: ~             
+      new:
+        title: Create New Title
+        display:
+          NONE: [type, title, slug, url, channel_id, author_user_id, categories_list, _categoryListJavascript, notes]
+          _list:    ~
+          _save: ~         
+
+                    
+
+       

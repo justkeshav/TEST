@@ -1,0 +1,18 @@
+
+.ui-dialog,
+.ui-dialog #sf_admin_container h1,
+.ui-dialog .sf_admin_actions
+{
+   display: none;
+}
+
+#sf_admin_container .ui-autocomplete-menu li a
+{
+   background-image: none;
+   padding-left: inherit;
+}
+
+#sf_admin_container .ui-menu .ui-menu-item
+{
+   list-style-type: none;
+}

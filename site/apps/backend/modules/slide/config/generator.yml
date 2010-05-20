@@ -1,0 +1,35 @@
+# The auto-generated versions of the *Success.php files have been overridden to add
+# breadcrumbs. If you make any changes here please check for any changes to those
+# auto-generated files.
+
+generator:
+  class: ltksfDoctrineGenerator
+  param:
+    model_class:           Slide
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          slide
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+    parent:                { model: Slideshow }
+
+    config:
+      actions: ~
+      fields:
+        slideshow_id: { label: Slideshow }
+        image_id:     { label: Image }
+      list:
+        title:   Slides
+        display: [_thumb, =heading]
+      filter: { class: false }
+      form:   { class: BackendSlideForm }
+      edit:
+        title:   Edit Slide '%%heading%%'
+        display:
+          NONE: [heading, image_id, image_link, text]
+      new:
+        display:
+          NONE: [heading, image_id, image_link, text]
