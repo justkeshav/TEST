@@ -2,6 +2,10 @@
 
 <project name="LoveToKnow" default="build">
 
+
+<echo>making sm change to forcce new build</echo>
+
+
    <!-- Set default property settings -->
    <property name="build.interactive" value="true" />
    <property name="build.interactive.firstrun" value="false" />
