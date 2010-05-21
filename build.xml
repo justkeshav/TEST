@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<project name="LoveToKnow" default="build">
+<project name="LoveToKnow" default="build" basedir="site">
 
    <target name="build" depends="set-properties">
 
@@ -36,13 +36,13 @@
       <mkdir dir="${test.dir.results}" />
 
       <!-- Run unit tests -->
-      <exec command="site/symfony simpletest:unit --xml=${test.file.results.unit}" />
+      <exec command="./symfony simpletest:unit --xml=${test.file.results.unit}" />
 
       <!-- Run frontend functional tests -->
-      <exec command="site/symfony test:functional frontend --xml=${test.file.results.functional.frontend}" />
+      <exec command="./symfony test:functional frontend --xml=${test.file.results.functional.frontend}" />
 
       <!-- Run backend functional tests -->
-      <exec command="site/symfony test:functional backend --xml=${test.file.results.functional.backend}" />
+      <exec command="./symfony test:functional backend --xml=${test.file.results.functional.backend}" />
 
       <!-- Fix up results files to have package names -->
       <reflexive file="${test.file.results.unit}">
@@ -79,7 +79,7 @@
       <mkdir dir="${deploy.path}" />
 
       <!-- This first rsync run excludes certain dirs that are known to contain user-generated files so those files dont get deleted -->
-      <exec command="rsync -rzpgEt --force --delete --exclude='/web/images/*/**' site ${deploy.path}/site" passthru="true" checkreturn="true" />
+      <exec command="rsync -rzpgEt --force --delete --exclude='/web/images/*/**' . ${deploy.path}/site" passthru="true" checkreturn="true" />
 
       <!-- This second run of rsync runs on the previously excluded dirs, but does not include the delete option -->
       <exec command="rsync -rzpgEt --force web/images ${deploy.path}/site/web" passthru="true" checkreturn="true" />
@@ -100,10 +100,12 @@
 
       <!-- backup files -->
       <mkdir dir="${backup.path}" />
-<!--VERIFY-->      <exec command="tar --exclude='workspace.tgz' --exclude='.git' --exclude='site/web/images/*/**' --atime-preserve -zcpf ${backup.file} ." passthru="true" checkreturn="true" />
+      <chmod file="${backup.path}" mode="0660" />
+<!--VERIFY-->      <exec command="tar --atime-preserve -zcpf ${backup.file} ." passthru="true" checkreturn="true" />
+      <chmod file="${backup.file}" mode="0440" />
 
 <!-- NEED ONCE PER HOST --> <!-- copy files to web server(s) -->
-<!--VERIFY-->      <exec command="scp -Bpqr site ${deploy.host}:${deploy.build.path}/site" passthru="true" checkreturn="true" />
+<!--VERIFY-->      <exec command="scp -Bpqr . ${deploy.host}:${deploy.build.path}/site" passthru="true" checkreturn="true" />
 
 <!-- NEED ONCE PER HOST -->      <!-- disable admin site -->
       <exec command="ssh -t ${deploy.host} sudo php ${deploy.path}/site/symfony project:disable prod backend" passthru="true" checkreturn="true" />
@@ -114,7 +116,9 @@
 
       <!-- backup prior database (old live) -->
       <mkdir dir="${backup.db.path}" />
+      <chmod file="${backup.db.path}" mode="0660" />
 <!--VERIFY-->      <exec command="mysqldump -h${deploy.prior.db.host} -u${deploy.prior.db.username} -p${deploy.prior.db.password} ${db.name} | gzip &gt; ${backup.db.file}" passthru="true" checkreturn="true" />
+      <chmod file="${backup.db.file}" mode="0440" />
 
       <!-- restore database (new live) -->
       <exec command="mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} -e &quot;drop database \`${db.name}\`&quot;" passthru="true" checkreturn="true" />
@@ -148,7 +152,7 @@
       <if>
          <istrue value="${build.debug}" />
          <then>
-            <reflexive file="site/web/frontend.php">
+            <reflexive file="web/frontend.php">
                <filterchain>
                   <replaceregexp>
                      <regexp pattern="'prod', false" replace="'prod', true" />
@@ -159,43 +163,43 @@
       </if>
 
       <!-- Make sure the cache dir exists and is writable by the web server, but is empty -->
-      <delete dir="site/cache" includeemptydirs="true" verbose="true" failonerror="true" />
-      <mkdir dir="site/cache" />
-      <exec command="chgrp ${web.user.group} site/cache" passthru="true" checkreturn="true" />
-      <exec command="chmod g+w site/cache" passthru="true" checkreturn="true" />
+      <delete dir="cache" includeemptydirs="true" verbose="true" failonerror="true" />
+      <mkdir dir="cache" />
+      <chown file="cache" user="root.${web.user.group}" />
+      <chmod file="cache" mode="0770" />
 
       <!-- Make sure the log dir exists and is writable by the web server, but is empty -->
-      <delete dir="site/log" includeemptydirs="true" verbose="true" failonerror="false" />
-      <mkdir dir="site/log" />
-      <exec command="chgrp ${web.user.group} site/log" passthru="true" checkreturn="true" />
-      <exec command="chmod g+w site/log" passthru="true" checkreturn="true" />
+      <delete dir="log" includeemptydirs="true" verbose="true" failonerror="false" />
+      <mkdir dir="log" />
+      <chown file="log" user="root.${web.user.group}" />
+      <chmod file="log" mode="0770" />
 
       <!-- Make sure the web/uploads dir exists and is writable by the web server, but is empty -->
-      <delete dir="site/web/uploads" includeemptydirs="true" verbose="true" failonerror="true" />
-      <mkdir dir="site/web/uploads" />
-      <exec command="chgrp ${web.user.group} site/web/uploads" passthru="true" checkreturn="true" />
-      <exec command="chmod g+w site/web/uploads" passthru="true" checkreturn="true" />
+      <delete dir="web/uploads" includeemptydirs="true" verbose="true" failonerror="true" />
+      <mkdir dir="web/uploads" />
+      <chown file="web/uploads" user="root.${web.user.group}" />
+      <chmod file="web/uploads" mode="0770" />
 
       <!-- Make sure the web/images dir exists and is writable by the web server -->
-      <mkdir dir="site/web/images" />
-      <exec command="chgrp ${web.user.group} site/web/images" passthru="true" checkreturn="true" />
-      <exec command="chmod g+w site/web/images" passthru="true" checkreturn="true" />
+      <mkdir dir="web/images" />
+      <chown file="web/images" user="root.${web.user.group}" />
+      <chmod file="web/images" mode="0770" />
 
       <!-- Make sure the web/files dir exists and is writable by the web server -->
-      <mkdir dir="site/web/files" />
-      <exec command="chgrp ${web.user.group} site/web/files" passthru="true" checkreturn="true" />
-      <exec command="chmod g+w site/web/files" passthru="true" checkreturn="true" />
+      <mkdir dir="web/files" />
+      <chown file="web/files" user="root.${web.user.group}" />
+      <chmod file="web/files" mode="0770" />
 
       <!-- Make sure the symfony command is executable and then have it fix directory permissions -->
-      <exec command="chmod a+x site/symfony" passthru="true" checkreturn="true" />
-      <exec command="site/symfony project:permissions" passthru="true" checkreturn="true" />
+      <chown file="symfony" user="root.${web.user.group}" />
+      <chmod file="symfony" mode="0550" />
 
    </target>
 
    <target name="build-database">
 
       <!-- Set database script file names -->
-      <property name="db.dir.sql" value="site/data/sql" />
+      <property name="db.dir.sql" value="data/sql" />
       <property name="db.dir.deltas" value="${db.dir.sql}/deltas" />
       <property name="db.dir.deploy" value="${db.dir.sql}/deploy" />
       <property name="db.file.create" value="${db.dir.sql}/create.sql" />
@@ -232,13 +236,15 @@
          url="mysql:host=${deploy.db.host};dbname=${db.name}"
          userid="${deploy.db.username}"
          password="${deploy.db.password}"
-         dir="site/batch/deltas" />
+         dir="batch/deltas" />
 
    </target>
 
    <target name="set-properties">
 
       <!-- Set default property settings -->
+      <property name="env.properties" value="../env.properties" />
+      <property name="build.properties" value="../build.properties" />
       <property name="build.interactive" value="true" />
       <property name="build.interactive.firstrun" value="false" />
       <property name="build.test" value="false" />
@@ -262,9 +268,9 @@
          <then>
             <!-- load in properties from froma file if it exists -->
             <if>
-               <available file="build.properties" type="file" />
+               <available file="${build.properties}" type="file" />
                <then>
-                  <property file="build.properties" />
+                  <property file="${build.properties}" />
                </then>
                <else>
                   <echo>You do not have a build.properties file (or I do not have permission</echo>
@@ -301,16 +307,16 @@
       <if>
          <istrue value="${build.interactive}" />
          <then>
-            <delete file="build.properties" />
-            <append destFile="build.properties" text="web.user.group=${web.user.group}${line.separator}" />
-            <append destFile="build.properties" text="web.host=${web.host}${line.separator}" />
-            <append destFile="build.properties" text="web.host.static=${web.host.static}${line.separator}" />
-            <append destFile="build.properties" text="web.dir.site=${web.dir.site}${line.separator}" />
-            <append destFile="build.properties" text="${line.separator}" />
-            <append destFile="build.properties" text="db.basename=${db.basename}${line.separator}" />
-            <append destFile="build.properties" text="db.host=${db.host}${line.separator}" />
-            <append destFile="build.properties" text="db.username=${db.username}${line.separator}" />
-            <append destFile="build.properties" text="db.password=${db.password}${line.separator}" />
+            <delete file="${build.properties}" />
+            <append destFile="${build.properties}" text="web.user.group=${web.user.group}${line.separator}" />
+            <append destFile="${build.properties}" text="web.host=${web.host}${line.separator}" />
+            <append destFile="${build.properties}" text="web.host.static=${web.host.static}${line.separator}" />
+            <append destFile="${build.properties}" text="web.dir.site=${web.dir.site}${line.separator}" />
+            <append destFile="${build.properties}" text="${line.separator}" />
+            <append destFile="${build.properties}" text="db.basename=${db.basename}${line.separator}" />
+            <append destFile="${build.properties}" text="db.host=${db.host}${line.separator}" />
+            <append destFile="${build.properties}" text="db.username=${db.username}${line.separator}" />
+            <append destFile="${build.properties}" text="db.password=${db.password}${line.separator}" />
          </then>
       </if>
 
@@ -320,9 +326,9 @@
 
       <!--Load in some environment vars if available -->
       <if>
-         <available file="vars" type="file" />
+         <available file="../vars" type="file" />
          <then>
-            <copy file="vars" tofile="env.properties" overwrite="false">
+            <copy file="../vars" tofile="${env.properties}" overwrite="false">
                <filterchain>
                   <replaceregexp>
                      <regexp pattern="export\s" replace="env." />
@@ -332,9 +338,9 @@
          </then>
       </if>
       <if>
-         <available file="env.properties" type="file" />
+         <available file="${env.properties}" type="file" />
          <then>
-            <property file="env.properties" />
+            <property file="${env.properties}" />
          </then>
       </if>
 
