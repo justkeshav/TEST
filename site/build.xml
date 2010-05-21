@@ -91,9 +91,9 @@
    <target name="publish" depends="set-properties">
 <!-- NEED TO VERIFY EVERYTHING -->
 
-      <property name="backup.file" value="${backup.path}/${ORIG_BUILD_NUMBER}.tgz" />
-      <property name="backup.db.file" value="${backup.db.path}/${ORIG_BUILD_NUMBER}.sql.gz" />
-      <property name="deploy.build.path" value="${deploy.path}-builds/${ORIG_BUILD_NUMBER}" />
+      <property name="backup.file" value="${backup.path}/${env.ORIG_BUILD_NUMBER}.tgz" />
+      <property name="backup.db.file" value="${backup.db.path}/${env.ORIG_BUILD_NUMBER}.sql.gz" />
+      <property name="deploy.build.path" value="${deploy.path}-builds/${env.ORIG_BUILD_NUMBER}" />
 
       <phingcall target="build-files" />
 
@@ -105,15 +105,15 @@
 <!-- NEED ONCE PER HOST --> <!-- copy files to web server(s) -->
       <exec command="scp -Bpqr site ${deploy.host}:${deploy.build.path}/site" passthru="true" checkreturn="true" />
 
-<!-- copy static files to cdn -->
-
 <!-- NEED ONCE PER HOST -->      <!-- disable admin site -->
       <exec command="ssh -t ${deploy.host} sudo php ${deploy.path}/site/symfony project:disable prod backend" passthru="true" checkreturn="true" />
 
-      <!-- backup prior database -->
+<!-- copy static files to cdn -->
+
+      <!-- backup prior database (old live) -->
       <exec command="mysqldump -h${deploy.prior.db.host} -u${deploy.prior.db.username} -p${deploy.prior.db.password} ${db.name} | gzip &gt; ${backup.db.file}" passthru="true" checkreturn="true" />
 
-<!-- restore DB to secondary -->
+      <!-- restore database (new live) -->
       <exec command="mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} -e &quot;drop database \`${db.name}\`&quot;" passthru="true" checkreturn="true" />
       <exec command="mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} -e &quot;create database \`${db.name}\`&quot;" passthru="true" checkreturn="true" />
       <exec command="gunzip &lt; ${backup.db.file} | mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} ${db.name}" checkreturn="true" />
@@ -125,7 +125,7 @@
 
 <!-- NEED ONCE PER HOST -->      <!-- restart apache -->
       <exec command="ssh -t ${deploy.host} sudo ltkrestart" passthru="true" checkreturn="true" />
-
+wget -O - http://admin.lovetoknow.local/ | grep "Temporarily Unavailable"
    </target>
 
    <target name="build-files">
@@ -314,6 +314,14 @@
       <!-- Set properties based on inputs -->
       <property name="db.name" value="${db.basename}" />
       <property name="db.test.name" value="TEST-${db.name}" />
+
+      <!--Load in some environment vars if available -->
+      <if>
+         <available file="env.properties" type="file" />
+         <then>
+            <property file="env.properties" />
+         </then>
+      </if>
 
       <!-- Sets the DSTAMP, TSTAMP and TODAY properties -->
       <tstamp />
