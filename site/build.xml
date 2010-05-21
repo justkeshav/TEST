@@ -185,12 +185,12 @@
       <!-- backup files -->
       <exec command="tar --exclude='workspace.tgz' --exclude='.git' --exclude='site/web/images/*/**' --atime-preserve -zcpf ${backup.file} ." passthru="true" checkreturn="true" />
 
-<!-- NEED ONCE PER HOST <!-- copy files to web server(s) -->
+<!-- NEED ONCE PER HOST --> <!-- copy files to web server(s) -->
       <exec command="scp -Bpqr site ${deploy.host}:${deploy.build.path}/site" passthru="true" checkreturn="true" />
 
 <!-- copy static files to cdn -->
 
-<!-- NEED ONCE PER HOST      <!-- disable admin site -->
+<!-- NEED ONCE PER HOST -->      <!-- disable admin site -->
       <exec command="ssh -t ${deploy.host} sudo php ${deploy.path}/site/symfony project:disable prod backend" passthru="true" checkreturn="true" />
 
       <!-- backup prior database -->
@@ -203,10 +203,10 @@
 
       <phingcall target="build-database" />
 
-<!-- NEED ONCE PER HOST      <!-- switch to new dir -->
+<!-- NEED ONCE PER HOST -->     <!-- switch to new dir -->
       <exec command="ssh -t ${deploy.host} sudo rm ${deploy.path}; sudo ln -s ${deploy.build.path} ${deploy.path}" passthru="true" checkreturn="true" />
 
-<!-- NEED ONCE PER HOST      <!-- restart apache -->
+<!-- NEED ONCE PER HOST -->      <!-- restart apache -->
       <exec command="ssh -t ${deploy.host} sudo ltkrestart" passthru="true" checkreturn="true" />
 
    </target>
