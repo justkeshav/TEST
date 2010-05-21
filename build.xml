@@ -125,7 +125,7 @@
 
 <!-- NEED ONCE PER HOST -->      <!-- restart apache -->
       <exec command="ssh -t ${deploy.host} sudo ltkrestart" passthru="true" checkreturn="true" />
-wget -O - http://admin.lovetoknow.local/ | grep "Temporarily Unavailable"
+<!--wget -O - http://admin.lovetoknow.local/ | grep "Temporarily Unavailable"-->
    </target>
 
    <target name="build-files">
@@ -316,6 +316,18 @@ wget -O - http://admin.lovetoknow.local/ | grep "Temporarily Unavailable"
       <property name="db.test.name" value="TEST-${db.name}" />
 
       <!--Load in some environment vars if available -->
+      <if>
+         <available file="vars" type="file" />
+         <then>
+            <copy file="vars" tofile="env.properties" overwrite="false">
+               <filterchain>
+                  <replaceregexp>
+                     <regexp pattern="export\s" replace="env." />
+                  </replaceregexp>
+               </filterchain>
+            </copy>
+         </then>
+      </if>
       <if>
          <available file="env.properties" type="file" />
          <then>
