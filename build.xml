@@ -26,7 +26,7 @@
       <phingcall target="build-database" />
 
       <!-- Setup test file names -->
-      <property name="test.dir.results" value="test/results" />
+      <property name="test.dir.results" value="site/test/results" />
       <property name="test.file.results.unit" value="${test.dir.results}/unit.xml" />
       <property name="test.file.results.functional.frontend" value="${test.dir.results}/functional-frontend.xml" />
       <property name="test.file.results.functional.backend" value="${test.dir.results}/functional-backend.xml" />
@@ -36,13 +36,13 @@
       <mkdir dir="${test.dir.results}" />
 
       <!-- Run unit tests -->
-      <exec command="./symfony simpletest:unit --xml=${test.file.results.unit}" />
+      <exec command="site/symfony simpletest:unit --xml=${test.file.results.unit}" />
 
       <!-- Run frontend functional tests -->
-      <exec command="./symfony test:functional frontend --xml=${test.file.results.functional.frontend}" />
+      <exec command="site/symfony test:functional frontend --xml=${test.file.results.functional.frontend}" />
 
       <!-- Run backend functional tests -->
-      <exec command="./symfony test:functional backend --xml=${test.file.results.functional.backend}" />
+      <exec command="site/symfony test:functional backend --xml=${test.file.results.functional.backend}" />
 
       <!-- Fix up results files to have package names -->
       <reflexive file="${test.file.results.unit}">
@@ -79,7 +79,7 @@
       <mkdir dir="${deploy.path}" />
 
       <!-- This first rsync run excludes certain dirs that are known to contain user-generated files so those files dont get deleted -->
-      <exec command="rsync -rzpgEt --force --delete --exclude='/web/images/*/**' . ${deploy.path}/site" passthru="true" checkreturn="true" />
+      <exec command="rsync -rzpgEt --force --delete --exclude='/web/images/*/**' site ${deploy.path}/site" passthru="true" checkreturn="true" />
 
       <!-- This second run of rsync runs on the previously excluded dirs, but does not include the delete option -->
       <exec command="rsync -rzpgEt --force web/images ${deploy.path}/site/web" passthru="true" checkreturn="true" />
@@ -156,43 +156,43 @@
       </if>
 
       <!-- Make sure the cache dir exists and is writable by the web server, but is empty -->
-      <delete dir="cache" includeemptydirs="true" verbose="true" failonerror="true" />
-      <mkdir dir="cache" />
-      <exec command="chgrp ${web.user.group} cache" passthru="true" checkreturn="true" />
-      <exec command="chmod g+w cache" passthru="true" checkreturn="true" />
+      <delete dir="site/cache" includeemptydirs="true" verbose="true" failonerror="true" />
+      <mkdir dir="site/cache" />
+      <exec command="chgrp ${web.user.group} site/cache" passthru="true" checkreturn="true" />
+      <exec command="chmod g+w site/cache" passthru="true" checkreturn="true" />
 
       <!-- Make sure the log dir exists and is writable by the web server, but is empty -->
-      <delete dir="log" includeemptydirs="true" verbose="true" failonerror="false" />
-      <mkdir dir="log" />
-      <exec command="chgrp ${web.user.group} log" passthru="true" checkreturn="true" />
-      <exec command="chmod g+w log" passthru="true" checkreturn="true" />
+      <delete dir="site/log" includeemptydirs="true" verbose="true" failonerror="false" />
+      <mkdir dir="site/log" />
+      <exec command="chgrp ${web.user.group} site/log" passthru="true" checkreturn="true" />
+      <exec command="chmod g+w site/log" passthru="true" checkreturn="true" />
 
       <!-- Make sure the web/uploads dir exists and is writable by the web server, but is empty -->
-      <delete dir="web/uploads" includeemptydirs="true" verbose="true" failonerror="true" />
-      <mkdir dir="web/uploads" />
-      <exec command="chgrp ${web.user.group} web/uploads" passthru="true" checkreturn="true" />
-      <exec command="chmod g+w web/uploads" passthru="true" checkreturn="true" />
+      <delete dir="site/web/uploads" includeemptydirs="true" verbose="true" failonerror="true" />
+      <mkdir dir="site/web/uploads" />
+      <exec command="chgrp ${web.user.group} site/web/uploads" passthru="true" checkreturn="true" />
+      <exec command="chmod g+w site/web/uploads" passthru="true" checkreturn="true" />
 
       <!-- Make sure the web/images dir exists and is writable by the web server -->
-      <mkdir dir="web/images" />
-      <exec command="chgrp ${web.user.group} web/images" passthru="true" checkreturn="true" />
-      <exec command="chmod g+w web/images" passthru="true" checkreturn="true" />
+      <mkdir dir="site/web/images" />
+      <exec command="chgrp ${web.user.group} site/web/images" passthru="true" checkreturn="true" />
+      <exec command="chmod g+w site/web/images" passthru="true" checkreturn="true" />
 
       <!-- Make sure the web/files dir exists and is writable by the web server -->
-      <mkdir dir="web/files" />
-      <exec command="chgrp ${web.user.group} web/files" passthru="true" checkreturn="true" />
-      <exec command="chmod g+w web/files" passthru="true" checkreturn="true" />
+      <mkdir dir="site/web/files" />
+      <exec command="chgrp ${web.user.group} site/web/files" passthru="true" checkreturn="true" />
+      <exec command="chmod g+w site/web/files" passthru="true" checkreturn="true" />
 
       <!-- Make sure the symfony command is executable and then have it fix directory permissions -->
-      <exec command="chmod a+x symfony" passthru="true" checkreturn="true" />
-      <exec command="./symfony project:permissions" passthru="true" checkreturn="true" />
+      <exec command="chmod a+x site/symfony" passthru="true" checkreturn="true" />
+      <exec command="site/symfony project:permissions" passthru="true" checkreturn="true" />
 
    </target>
 
    <target name="build-database">
 
       <!-- Set database script file names -->
-      <property name="db.dir.sql" value="data/sql" />
+      <property name="db.dir.sql" value="site/data/sql" />
       <property name="db.dir.deltas" value="${db.dir.sql}/deltas" />
       <property name="db.dir.deploy" value="${db.dir.sql}/deploy" />
       <property name="db.file.create" value="${db.dir.sql}/create.sql" />
