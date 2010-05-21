@@ -229,7 +229,7 @@
          url="mysql:host=${deploy.db.host};dbname=${db.name}"
          userid="${deploy.db.username}"
          password="${deploy.db.password}"
-         dir="batch/deltas" />
+         dir="site/batch/deltas" />
 
    </target>
 
