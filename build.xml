@@ -96,42 +96,81 @@
 
       <phingcall target="build-files" />
 
-<!-- compress css & js -->
+      <!-- compress css & js -->
+      <foreach absparam="file" target="yuicompressor">
+         <fileset dir="web" >
+            <include name="**.js" />
+            <include name="**.css" />
+         </fileset>
+      </foreach>
 
       <!-- backup files -->
       <mkdir dir="${backup.path}" />
       <chmod file="${backup.path}" mode="0660" />
-<!--VERIFY-->      <exec command="tar --atime-preserve -zcpf ${backup.file} ." passthru="true" checkreturn="true" />
+      <exec command="tar --atime-preserve -zcpf ${backup.file} ." passthru="true" checkreturn="true" />
       <chmod file="${backup.file}" mode="0440" />
+      <phingcall target="check-file"><property name="file" value="${backup.file}" /><property name="minsize" value="1048576" /></phingcall>
 
-<!-- NEED ONCE PER HOST --> <!-- copy files to web server(s) -->
-<!--VERIFY-->      <exec command="scp -Bpqr . ${deploy.host}:${deploy.build.path}/site" passthru="true" checkreturn="true" />
+      <!-- copy files to web server(s) -->
+      <foreach list="${deploy.host}" param="host" target="publish-files" delimiter=" " />
 
-<!-- NEED ONCE PER HOST -->      <!-- disable admin site -->
-      <exec command="ssh -t ${deploy.host} sudo php ${deploy.path}/site/symfony project:disable prod backend" passthru="true" checkreturn="true" />
-      <exec command="wget -O - http://admin.${web.host}/" passthru="true" />
-      <exec command="wget -O - http://admin.${web.host}/ | grep &quot;Temporarily Unavailable&quot;" passthru="true" checkreturn="true" />
-
-<!-- copy static files to cdn -->
+      <!-- disable admin site -->
+      <foreach list="${deploy.host}" param="host" target="disable-admin" delimiter=" " />
 
       <!-- backup prior database (old live) -->
       <mkdir dir="${backup.db.path}" />
       <chmod file="${backup.db.path}" mode="0660" />
-<!--VERIFY-->      <exec command="mysqldump -h${deploy.prior.db.host} -u${deploy.prior.db.username} -p${deploy.prior.db.password} ${db.name} | gzip &gt; ${backup.db.file}" passthru="true" checkreturn="true" />
+      <exec command="mysqldump -h${deploy.prior.db.host} -u${deploy.prior.db.username} -p${deploy.prior.db.password} ${db.name} | gzip &gt; ${backup.db.file}" passthru="true" checkreturn="true" />
       <chmod file="${backup.db.file}" mode="0440" />
+      <phingcall target="check-file"><property name="file" value="${backup.db.file}" /><property name="minsize" value="1048576" /></phingcall>
 
       <!-- restore database (new live) -->
       <exec command="mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} -e &quot;drop database \`${db.name}\`&quot;" passthru="true" checkreturn="true" />
       <exec command="mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} -e &quot;create database \`${db.name}\`&quot;" passthru="true" checkreturn="true" />
-<!--VERIFY-->      <exec command="gunzip &lt; ${backup.db.file} | mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} ${db.name}" checkreturn="true" />
-
+      <exec command="gunzip &lt; ${backup.db.file} | mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} ${db.name}" checkreturn="true" />
+      
       <phingcall target="build-database" />
 
-<!-- NEED ONCE PER HOST -->     <!-- switch to new dir -->
-<!--VERIFY-->      <exec command="ssh -t ${deploy.host} sudo rm ${deploy.path}; sudo ln -s ${deploy.build.path} ${deploy.path}" passthru="true" checkreturn="true" />
+<!-- copy static files to cdn -->
 
-<!-- NEED ONCE PER HOST -->      <!-- restart apache -->
-      <exec command="ssh -t ${deploy.host} sudo ltkrestart" passthru="true" checkreturn="true" />
+      <!-- switch to new dir -->
+      <foreach list="${deploy.host}" param="host" target="enable-files" delimiter=" " />
+
+      <exec command="mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} -e &quot;insert into releaselog (version, build) values ('${env.ORIG_BUILD_VERSION}', ${env.ORIG_BUILD_NUMBER})&quot; ${db.name}" passthru="true" checkreturn="true" />
+
+   </target>
+
+   <target name="yuicompressor" if="file">
+      <exec command="java -jar ../yuicompressor.jar ${file} --charset utf8 -o ${file}" passthru="true" checkreturn="true" />
+      <phingcall target="check-file" />
+   </target>
+
+   <target name="publish-files" if="host">
+      <exec command="scp -Bpqr . ${host}:${deploy.build.path}/site" passthru="true" checkreturn="true" />
+   </target>
+
+   <target name="disable-admin" if="host">
+      <exec command="su ltk -c &quot;ssh -t ${host} sudo php ${deploy.path}/site/symfony project:disable prod backend&quot;" passthru="true" checkreturn="true" />
+      <exec command="wget -O - http://admin.${web.host}/" passthru="true" />
+      <exec command="wget -O - http://admin.${web.host}/ | grep &quot;Temporarily Unavailable&quot;" passthru="true" checkreturn="true" />
+   </target>
+
+   <target name="enable-files" if="host">
+      <exec command="su ltk -c &quot;ssh -t ${host} sudo rm ${deploy.path}&quot;" passthru="true" checkreturn="true" />
+      <exec command="su ltk -c &quot;ssh -t ${host} sudo ln -s ${deploy.build.path} ${deploy.path}&quot;" passthru="true" checkreturn="true" />
+      <exec command="su ltk -c &quot;ssh -t ${host} sudo ltkrestart&quot;" passthru="true" checkreturn="true" />
+   </target>
+
+   <target name="check-file" if="file">
+
+      <property name="minsize" value="0" />
+
+      <available file="${file}" type="file" property="found" />
+      <fail unless="found" message="File '${file}' not found." />
+
+      <filesize file="${file}" />
+      <php expression="${filesize} <= ${minsize}" returnProperty="toosmall"/>
+      <fail if="toosmall" message="File '${file}' is not larger than ${minsize} bytes." />
 
    </target>
 

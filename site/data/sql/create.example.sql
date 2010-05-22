@@ -13,3 +13,12 @@ create table if not exists changelog
   description varchar(500) not null,
   primary key (change_number, delta_set)
 );
+
+-- needed for release tracking
+create table if not exists releaselog
+(
+  build bigint not null,
+  version varchar(10) not null,
+  complete_dt timestamp not null,
+  primary key (build)
+);
