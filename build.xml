@@ -128,7 +128,7 @@
       <exec command="mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} -e &quot;drop database \`${db.name}\`&quot;" passthru="true" checkreturn="true" />
       <exec command="mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} -e &quot;create database \`${db.name}\`&quot;" passthru="true" checkreturn="true" />
       <exec command="gunzip &lt; ${backup.db.file} | mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} ${db.name}" checkreturn="true" />
-      
+
       <phingcall target="build-database" />
 
 <!-- copy static files to cdn -->
@@ -169,7 +169,7 @@
       <fail unless="found" message="File '${file}' not found." />
 
       <filesize file="${file}" />
-      <php expression="${filesize} <= ${minsize}" returnProperty="toosmall"/>
+      <php expression="${filesize} &lt;= ${minsize}" returnProperty="toosmall"/>
       <fail if="toosmall" message="File '${file}' is not larger than ${minsize} bytes." />
 
    </target>
