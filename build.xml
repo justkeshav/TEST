@@ -204,33 +204,33 @@
       <!-- Make sure the cache dir exists and is writable by the web server, but is empty -->
       <delete dir="cache" includeemptydirs="true" verbose="true" failonerror="true" />
       <mkdir dir="cache" />
-      <chown file="cache" user="root:${web.user.group}" />
+      <exec command="chown root:${web.user.group} cache" passthru="true" checkreturn="true" />
       <chmod file="cache" mode="0770" />
 
       <!-- Make sure the log dir exists and is writable by the web server, but is empty -->
       <delete dir="log" includeemptydirs="true" verbose="true" failonerror="false" />
       <mkdir dir="log" />
-      <chown file="log" user="root:${web.user.group}" />
+      <exec command="chown root:${web.user.group} log" passthru="true" checkreturn="true" />
       <chmod file="log" mode="0770" />
 
       <!-- Make sure the web/uploads dir exists and is writable by the web server, but is empty -->
       <delete dir="web/uploads" includeemptydirs="true" verbose="true" failonerror="true" />
       <mkdir dir="web/uploads" />
-      <chown file="web/uploads" user="root:${web.user.group}" />
+      <exec command="chown root:${web.user.group} web/uploads" passthru="true" checkreturn="true" />
       <chmod file="web/uploads" mode="0770" />
 
       <!-- Make sure the web/images dir exists and is writable by the web server -->
       <mkdir dir="web/images" />
-      <chown file="web/images" user="root:${web.user.group}" />
+      <exec command="chown root:${web.user.group} web/images" passthru="true" checkreturn="true" />
       <chmod file="web/images" mode="0770" />
 
       <!-- Make sure the web/files dir exists and is writable by the web server -->
       <mkdir dir="web/files" />
-      <chown file="web/files" user="root:${web.user.group}" />
+      <exec command="chown root:${web.user.group} web/files" passthru="true" checkreturn="true" />
       <chmod file="web/files" mode="0770" />
 
       <!-- Make sure the symfony command is executable and then have it fix directory permissions -->
-      <chown file="symfony" user="root:${web.user.group}" />
+      <exec command="chown root:${web.user.group} symfony" passthru="true" checkreturn="true" />
       <chmod file="symfony" mode="0550" />
 
    </target>
