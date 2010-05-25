@@ -11,7 +11,7 @@
       <if>
          <istrue value="${build.interactive.firstrun}" />
          <then>
-            <echo level="warning">Please add 'Include ${web.dir.site}/config/httpd.conf' to your apache conf file and restart apache.</echo>
+            <echo level="warning">Please add 'Include ${web.path}/site/config/httpd.conf' to your apache conf file and restart apache.</echo>
          </then>
       </if>
 
@@ -19,7 +19,7 @@
 
    <target name="test" depends="set-properties">
 
-      <property name="db.name" value="${db.test.name}" override="true" />
+      <property name="db.test.name" value="${db.name}" />
 
       <phingcall target="build-files" />
 
@@ -76,13 +76,13 @@
       <phingcall target="build-database" />
 
       <!-- Make sure the deploy dir exists -->
-      <mkdir dir="${deploy.path}" />
+      <mkdir dir="${web.path}" />
 
       <!-- This first rsync run excludes certain dirs that are known to contain user-generated files so those files dont get deleted -->
-      <exec command="rsync -rzpgEt --force --delete --exclude='/web/images/*/**' . ${deploy.path}/site" passthru="true" checkreturn="true" />
+      <exec command="rsync -rzpgEt --force --delete --exclude='/web/images/*/**' . ${web.path}/site" passthru="true" checkreturn="true" />
 
       <!-- This second run of rsync runs on the previously excluded dirs, but does not include the delete option -->
-      <exec command="rsync -rzpgEt --force web/images ${deploy.path}/site/web" passthru="true" checkreturn="true" />
+      <exec command="rsync -rzpgEt --force web/images ${web.path}/site/web" passthru="true" checkreturn="true" />
 
       <exec command="ltkrestart" passthru="true" checkreturn="true" />
 
@@ -90,14 +90,14 @@
 
    <target name="publish" depends="set-properties">
 
-      <property name="backup.file" value="${backup.path}/${env.ORIG_BUILD_NUMBER}.tgz" />
-      <property name="backup.db.file" value="${backup.db.path}/${env.ORIG_BUILD_NUMBER}.sql.gz" />
-      <property name="deploy.build.path" value="${deploy.path}-builds/${env.ORIG_BUILD_NUMBER}" />
+      <property name="publish.dir" value="${web.path}-builds/${env.ORIG_BUILD_NUMBER}" />
+      <property name="backup.file" value="${backup.dir}/${env.ORIG_BUILD_NUMBER}.tgz" />
+      <property name="backup.db.file" value="${backup.db.dir}/${env.ORIG_BUILD_NUMBER}.sql.gz" />
 
       <phingcall target="build-files" />
 
       <!-- compress css & js -->
-      <foreach absparam="file" target="yuicompressor">
+      <foreach param="file" target="yuicompressor">
          <fileset dir="web" >
             <include name="**.js" />
             <include name="**.css" />
@@ -105,38 +105,49 @@
       </foreach>
 
       <!-- backup files -->
-      <mkdir dir="${backup.path}" />
-      <chmod file="${backup.path}" mode="0660" />
+      <mkdir dir="${backup.dir}" />
+      <chmod file="${backup.dir}" mode="0775" />
+      <exec command="chown ${web.user} ${backup.dir}" passthru="true" checkreturn="true" />
       <exec command="tar --atime-preserve -zcpf ${backup.file} ." passthru="true" checkreturn="true" />
-      <chmod file="${backup.file}" mode="0440" />
-      <phingcall target="check-file"><property name="file" value="${backup.file}" /><property name="minsize" value="1048576" /></phingcall>
+      <chmod file="${backup.file}" mode="0444" />
+      <exec command="chown ${web.user} ${backup.file}" passthru="true" checkreturn="true" />
+      <phingcall target="check-file"><property name="file" value="${backup.file}" /><property name="minsize" value="1048577" /></phingcall>
 
       <!-- copy files to web server(s) -->
-      <foreach list="${deploy.host}" param="host" target="publish-files" delimiter=" " />
+      <foreach list="${publish.hosts}" param="host" target="publish-files" delimiter=" " />
 
       <!-- disable admin site -->
-      <foreach list="${deploy.host}" param="host" target="disable-admin" delimiter=" " />
+      <foreach list="${publish.hosts}" param="host" target="publish-disable-admin" delimiter=" " />
 
       <!-- backup prior database (old live) -->
-      <mkdir dir="${backup.db.path}" />
-      <chmod file="${backup.db.path}" mode="0660" />
-      <exec command="mysqldump -h${deploy.prior.db.host} -u${deploy.prior.db.username} -p${deploy.prior.db.password} ${db.name} | gzip &gt; ${backup.db.file}" passthru="true" checkreturn="true" />
-      <chmod file="${backup.db.file}" mode="0440" />
-      <phingcall target="check-file"><property name="file" value="${backup.db.file}" /><property name="minsize" value="1048576" /></phingcall>
+      <mkdir dir="${backup.db.dir}" />
+      <chmod file="${backup.db.dir}" mode="0775" />
+      <exec command="chown ${web.user} ${backup.db.dir}" passthru="true" checkreturn="false" />
+      <exec command="mysqldump -h${backup.db.host} -u${backup.db.username} -p${backup.db.password} ${backup.db.name} | gzip &gt; ${backup.db.file}" passthru="true" checkreturn="false" />
+      <chmod file="${backup.db.file}" mode="0444" />
+      <exec command="chown ${web.user} ${backup.db.file}" passthru="true" checkreturn="true" />
+      <phingcall target="check-file"><property name="file" value="${backup.db.file}" /><property name="minsize" value="1" /></phingcall>
 
       <!-- restore database (new live) -->
-      <exec command="mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} -e &quot;drop database \`${db.name}\`&quot;" passthru="true" checkreturn="true" />
-      <exec command="mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} -e &quot;create database \`${db.name}\`&quot;" passthru="true" checkreturn="true" />
-      <exec command="gunzip &lt; ${backup.db.file} | mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} ${db.name}" checkreturn="true" />
+      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} -e &quot;drop database \`${build.db.name}\`&quot;" passthru="true" checkreturn="false" />
+      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} -e &quot;create database \`${build.db.name}\`&quot;" passthru="true" checkreturn="true" />
+      <exec command="gunzip &lt; ${backup.db.file} | mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} ${build.db.name}" checkreturn="false" />
+
+      <!-- need the local files configured with the build db info because we will be running batch tasks from the build server -->
+      <property name="db.name" value="${build.db.name}" override="true" />
+      <property name="db.host" value="${build.db.host}" override="true" />
+      <property name="db.username" value="${build.db.username}" override="true" />
+      <property name="db.password" value="${build.db.password}" override="true" />
+      <phingcall target="build-property-files" />
 
       <phingcall target="build-database" />
 
 <!-- copy static files to cdn -->
 
       <!-- switch to new dir -->
-      <foreach list="${deploy.host}" param="host" target="enable-files" delimiter=" " />
+      <foreach list="${publish.hosts}" param="host" target="publish-enable-site" delimiter=" " />
 
-      <exec command="mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} -e &quot;insert into releaselog (version, build) values ('${env.ORIG_BUILD_VERSION}', ${env.ORIG_BUILD_NUMBER})&quot; ${db.name}" passthru="true" checkreturn="true" />
+      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} -e &quot;insert into releaselog (version, build) values ('${env.ORIG_BUILD_VERSION}', ${env.ORIG_BUILD_NUMBER})&quot; ${build.db.name}" passthru="true" checkreturn="true" />
 
    </target>
 
@@ -146,18 +157,21 @@
    </target>
 
    <target name="publish-files" if="host">
-      <exec command="scp -Bpqr . ${host}:${deploy.build.path}/site" passthru="true" checkreturn="true" />
+      <property name="restore.file" value="/tmp/publish-${env.ORIG_BUILD_NUMBER}.tgz" />
+      <exec command="su ltk -c &quot;ssh -t ${host} \&quot;sudo mkdir -p -m 0755 ${publish.dir}; sudo chown ${web.user} ${publish.dir}\&quot;&quot;" passthru="true" checkreturn="true" />
+      <exec command="su ltk -c &quot;scp -Bpq ${backup.file} ${host}:${restore.file}&quot;" passthru="true" checkreturn="true" />
+      <exec command="su ltk -c &quot;ssh -t ${host} \&quot;cd ${publish.dir}; sudo tar --atime-preserve -xpf ${restore.file}; sudo rm ${restore.file}\&quot;&quot;" passthru="true" checkreturn="true" />
    </target>
 
-   <target name="disable-admin" if="host">
-      <exec command="su ltk -c &quot;ssh -t ${host} sudo php ${deploy.path}/site/symfony project:disable prod backend&quot;" passthru="true" checkreturn="true" />
-      <exec command="wget -O - http://admin.${web.host}/" passthru="true" />
-      <exec command="wget -O - http://admin.${web.host}/ | grep &quot;Temporarily Unavailable&quot;" passthru="true" checkreturn="true" />
+   <target name="publish-disable-admin" if="host">
+      <exec command="su ltk -c &quot;ssh -t ${host} sudo php ${web.path}/site/symfony project:disable prod backend&quot;" passthru="true" checkreturn="false" />
+      <exec command="wget --http-user=test --http-password=ltk123 -O - http://admin.${web.host}/" passthru="true" />
+      <exec command="wget --http-user=test --http-password=ltk123 -O - http://admin.${web.host}/ | grep &quot;Temporarily Unavailable&quot;" passthru="true" checkreturn="false" />
    </target>
 
-   <target name="enable-files" if="host">
-      <exec command="su ltk -c &quot;ssh -t ${host} sudo rm ${deploy.path}&quot;" passthru="true" checkreturn="true" />
-      <exec command="su ltk -c &quot;ssh -t ${host} sudo ln -s ${deploy.build.path} ${deploy.path}&quot;" passthru="true" checkreturn="true" />
+   <target name="publish-enable-site" if="host">
+      <exec command="su ltk -c &quot;ssh -t ${host} sudo rm ${web.path}&quot;" passthru="true" checkreturn="true" />
+      <exec command="su ltk -c &quot;ssh -t ${host} sudo ln -s ${publish.dir} ${web.path}&quot;" passthru="true" checkreturn="true" />
       <exec command="su ltk -c &quot;ssh -t ${host} sudo ltkrestart&quot;" passthru="true" checkreturn="true" />
    </target>
 
@@ -166,15 +180,17 @@
       <property name="minsize" value="0" />
 
       <available file="${file}" type="file" property="found" />
-      <fail unless="found" message="File '${file}' not found." />
+      <if><not><isset property="found" /></not><then><fail message="File '${file}' not found." /></then></if>
 
       <filesize file="${file}" />
-      <php expression="${filesize} &lt;= ${minsize}" returnProperty="toosmall"/>
-      <fail if="toosmall" message="File '${file}' is not larger than ${minsize} bytes." />
+      <php expression="${filesize} &gt;= ${minsize}" returnProperty="bigenough" />
+      <if><isfalse value="${bigenough}" /><then><fail message="File '${file}' is smaller than ${minsize} bytes." /></then></if>
 
    </target>
 
-   <target name="build-files">
+   <target name="build-property-files">
+
+      <property name="db.test.name" value="TEST-${db.name}" />
 
       <!-- Replace all vars in files with ".example." in their name and rename without the ".example" -->
       <copy todir="." overwrite="true">
@@ -186,6 +202,10 @@
             <expandproperties />
          </filterchain>
       </copy>
+
+   </target>
+
+   <target name="build-files" depends="build-property-files">
 
       <!-- Set extra debug output for dev sites -->
       <if>
@@ -204,33 +224,33 @@
       <!-- Make sure the cache dir exists and is writable by the web server, but is empty -->
       <delete dir="cache" includeemptydirs="true" verbose="true" failonerror="true" />
       <mkdir dir="cache" />
-      <exec command="chown root:${web.user.group} cache" passthru="true" checkreturn="true" />
+      <exec command="chown ${web.user} cache" passthru="true" checkreturn="true" />
       <chmod file="cache" mode="0770" />
 
       <!-- Make sure the log dir exists and is writable by the web server, but is empty -->
       <delete dir="log" includeemptydirs="true" verbose="true" failonerror="false" />
       <mkdir dir="log" />
-      <exec command="chown root:${web.user.group} log" passthru="true" checkreturn="true" />
+      <exec command="chown ${web.user} log" passthru="true" checkreturn="true" />
       <chmod file="log" mode="0770" />
 
       <!-- Make sure the web/uploads dir exists and is writable by the web server, but is empty -->
       <delete dir="web/uploads" includeemptydirs="true" verbose="true" failonerror="true" />
       <mkdir dir="web/uploads" />
-      <exec command="chown root:${web.user.group} web/uploads" passthru="true" checkreturn="true" />
+      <exec command="chown ${web.user} web/uploads" passthru="true" checkreturn="true" />
       <chmod file="web/uploads" mode="0770" />
 
       <!-- Make sure the web/images dir exists and is writable by the web server -->
       <mkdir dir="web/images" />
-      <exec command="chown root:${web.user.group} web/images" passthru="true" checkreturn="true" />
+      <exec command="chown ${web.user} web/images" passthru="true" checkreturn="true" />
       <chmod file="web/images" mode="0770" />
 
       <!-- Make sure the web/files dir exists and is writable by the web server -->
       <mkdir dir="web/files" />
-      <exec command="chown root:${web.user.group} web/files" passthru="true" checkreturn="true" />
+      <exec command="chown ${web.user} web/files" passthru="true" checkreturn="true" />
       <chmod file="web/files" mode="0770" />
 
       <!-- Make sure the symfony command is executable and then have it fix directory permissions -->
-      <exec command="chown root:${web.user.group} symfony" passthru="true" checkreturn="true" />
+      <exec command="chown ${web.user} symfony" passthru="true" checkreturn="true" />
       <chmod file="symfony" mode="0550" />
 
    </target>
@@ -238,57 +258,58 @@
    <target name="build-database">
 
       <!-- Set database script file names -->
-      <property name="db.dir.sql" value="data/sql" />
-      <property name="db.dir.deltas" value="${db.dir.sql}/deltas" />
-      <property name="db.dir.deploy" value="${db.dir.sql}/deploy" />
-      <property name="db.file.create" value="${db.dir.sql}/create.sql" />
-      <property name="db.file.deploy" value="${db.dir.deploy}/deploy-${DSTAMP}${TSTAMP}.sql" />
-      <property name="db.file.undo" value="${db.dir.deploy}/undo-${DSTAMP}${TSTAMP}.sql" />
+      <property name="build.dir.db.sql" value="data/sql" />
+      <property name="build.dir.db.deltas" value="${build.dir.db.sql}/deltas" />
+      <property name="build.dir.db.deploy" value="${build.dir.db.sql}/deploy" />
+      <property name="build.file.db.create" value="${build.dir.db.sql}/create.sql" />
+      <property name="build.file.db.deploy" value="${build.dir.db.deploy}/deploy.sql" />
+      <property name="build.file.db.undo" value="${build.dir.db.deploy}/undo.sql" />
+      <property name="build.dir.batch" value="batch" />
+      <property name="build.dir.batch.deltas" value="${build.dir.batch}/deltas" />
 
       <!-- Make sure the db deploy dir exists, but is empty -->
-      <delete dir="${db.dir.deploy}" includeemptydirs="true" verbose="true" failonerror="true" />
-      <mkdir dir="${db.dir.deploy}" />
+      <delete dir="${build.dir.db.deploy}" includeemptydirs="true" verbose="true" failonerror="true" />
+      <mkdir dir="${build.dir.db.deploy}" />
 
       <!-- Create database if it doesnt exist -->
-      <exec command="mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} &lt; ${db.file.create}" passthru="true" checkreturn="true" />
+      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} &lt; ${build.file.db.create}" passthru="true" checkreturn="true" />
 
       <!-- load the dbdeploy task -->
       <taskdef name="dbdeploy" classname="phing.tasks.ext.dbdeploy.DbDeployTask"/>
 
       <!-- Generate the deployment scripts -->
       <dbdeploy
-         url="mysql:host=${deploy.db.host};dbname=${db.name}"
-         userid="${deploy.db.username}"
-         password="${deploy.db.password}"
-         dir="${db.dir.deltas}"
-         outputfile="${db.file.deploy}"
-         undooutputfile="${db.file.undo}" />
+         url="mysql:host=${build.db.host};dbname=${build.db.name}"
+         userid="${build.db.username}"
+         password="${build.db.password}"
+         dir="${build.dir.db.deltas}"
+         outputfile="${build.file.db.deploy}"
+         undooutputfile="${build.file.db.undo}" />
 
       <!-- Run the deployment file; use mysql command line to avoid trouble with large files or many statements and PDO -->
-      <exec command="mysql -h${deploy.db.host} -u${deploy.db.username} -p${deploy.db.password} ${db.name} &lt; ${db.file.deploy}" passthru="true" checkreturn="true" />
+      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} ${build.db.name} &lt; ${build.file.db.deploy}" passthru="true" checkreturn="true" />
 
       <!-- load the batchdeploy task -->
       <taskdef name="batchdeploy" classname="phing.tasks.user.BatchDeployTask"/>
 
       <!-- Generate the deployment scripts -->
       <batchdeploy
-         url="mysql:host=${deploy.db.host};dbname=${db.name}"
-         userid="${deploy.db.username}"
-         password="${deploy.db.password}"
-         dir="batch/deltas" />
+         url="mysql:host=${build.db.host};dbname=${build.db.name}"
+         userid="${build.db.username}"
+         password="${build.db.password}"
+         dir="${build.dir.batch.deltas}"
+         outputfile="/tmp/deploy.php"
+         undooutputfile="/tmp/undo.php" />
 
    </target>
 
    <target name="set-properties">
 
       <!-- Set default property settings -->
-      <property name="env.properties" value="../env.properties" />
       <property name="build.properties" value="../build.properties" />
+      <property name="build.properties.env" value="../env.properties" />
       <property name="build.interactive" value="true" />
       <property name="build.interactive.firstrun" value="false" />
-      <property name="build.test" value="false" />
-      <property name="deploy" value="false" />
-      <property name="deploy.dev" value="false" />
       <property name="provider.cache.query" value="Doctrine_Cache_Array" />
       <property name="provider.cache.result" value="Doctrine_Cache_Array" />
       <property name="provider.cache.result.lifespan" value="3600" />
@@ -328,17 +349,14 @@
          <istrue value="${build.interactive}" />
          <then>
             <!-- Prompt for property values that were not specified in the property file -->
-            <propertyprompt propertyName="web.user.group" promptText="What is the web server user's group" defaultValue="www-data" useExistingValue="true" />
+            <propertyprompt propertyName="web.user" promptText="What is the web server user's name:group" defaultValue="www-data:www-data" useExistingValue="true" />
             <propertyprompt propertyName="web.host" promptText="What is the site's host name" defaultValue="lovetoknow.local" useExistingValue="true" />
             <propertyprompt propertyName="web.host.static" promptText="What is the site's host name for static content" defaultValue="static.lovetoknow.local" useExistingValue="true" />
-            <propertyprompt propertyName="web.dir.site" promptText="What is the path to the site dir" defaultValue="/ltk/ltk/dev/site" useExistingValue="true" />
-            <propertyprompt propertyName="db.basename" promptText="What is the database name" defaultValue="ltk" useExistingValue="true" />
-            <propertyprompt propertyName="db.host" promptText="What is the database server host name" defaultValue="localhost" useExistingValue="true" />
-            <propertyprompt propertyName="db.username" promptText="What is the database username" defaultValue="root" useExistingValue="true" />
-            <propertyprompt propertyName="db.password" promptText="What is the database password" useExistingValue="true" />
-            <property name="deploy.db.host" value="${db.host}" />
-            <property name="deploy.db.username" value="${db.username}" />
-            <property name="deploy.db.password" value="${db.password}" />
+            <propertyprompt propertyName="web.path" promptText="What is the path to the project dir" defaultValue="/ltk/ltk/dev" useExistingValue="true" />
+            <propertyprompt propertyName="web.db.name" promptText="What is the database name" defaultValue="ltk" useExistingValue="true" />
+            <propertyprompt propertyName="web.db.host" promptText="What is the database server host name" defaultValue="localhost" useExistingValue="true" />
+            <propertyprompt propertyName="web.db.username" promptText="What is the database username" defaultValue="root" useExistingValue="true" />
+            <propertyprompt propertyName="web.db.password" promptText="What is the database password" useExistingValue="true" />
          </then>
       </if>
 
@@ -347,27 +365,23 @@
          <istrue value="${build.interactive}" />
          <then>
             <delete file="${build.properties}" />
-            <append destFile="${build.properties}" text="web.user.group=${web.user.group}${line.separator}" />
+            <append destFile="${build.properties}" text="web.user=${web.user}${line.separator}" />
             <append destFile="${build.properties}" text="web.host=${web.host}${line.separator}" />
             <append destFile="${build.properties}" text="web.host.static=${web.host.static}${line.separator}" />
-            <append destFile="${build.properties}" text="web.dir.site=${web.dir.site}${line.separator}" />
+            <append destFile="${build.properties}" text="web.path=${web.path}${line.separator}" />
             <append destFile="${build.properties}" text="${line.separator}" />
-            <append destFile="${build.properties}" text="db.basename=${db.basename}${line.separator}" />
-            <append destFile="${build.properties}" text="db.host=${db.host}${line.separator}" />
-            <append destFile="${build.properties}" text="db.username=${db.username}${line.separator}" />
-            <append destFile="${build.properties}" text="db.password=${db.password}${line.separator}" />
+            <append destFile="${build.properties}" text="web.db.name=${web.db.name}${line.separator}" />
+            <append destFile="${build.properties}" text="web.db.host=${web.db.host}${line.separator}" />
+            <append destFile="${build.properties}" text="web.db.username=${web.db.username}${line.separator}" />
+            <append destFile="${build.properties}" text="web.db.password=${web.db.password}${line.separator}" />
          </then>
       </if>
-
-      <!-- Set properties based on inputs -->
-      <property name="db.name" value="${db.basename}" />
-      <property name="db.test.name" value="TEST-${db.name}" />
 
       <!--Load in some environment vars if available -->
       <if>
          <available file="../vars" type="file" />
          <then>
-            <copy file="../vars" tofile="${env.properties}" overwrite="false">
+            <copy file="../vars" tofile="${build.properties.env}" overwrite="false">
                <filterchain>
                   <replaceregexp>
                      <regexp pattern="export\s" replace="env." />
@@ -377,11 +391,21 @@
          </then>
       </if>
       <if>
-         <available file="${env.properties}" type="file" />
+         <available file="${build.properties.env}" type="file" />
          <then>
-            <property file="${env.properties}" />
+            <property file="${build.properties.env}" />
          </then>
       </if>
+
+      <property name="db.name" value="${web.db.name}" />
+      <property name="db.host" value="${web.db.host}" />
+      <property name="db.username" value="${web.db.username}" />
+      <property name="db.password" value="${web.db.password}" />
+
+      <property name="build.db.name" value="${web.db.name}" />
+      <property name="build.db.host" value="${web.db.host}" />
+      <property name="build.db.username" value="${web.db.username}" />
+      <property name="build.db.password" value="${web.db.password}" />
 
       <!-- Sets the DSTAMP, TSTAMP and TODAY properties -->
       <tstamp />
