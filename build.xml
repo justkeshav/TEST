@@ -123,18 +123,17 @@
       <mkdir dir="${backup.db.dir}" />
       <chmod file="${backup.db.dir}" mode="0775" />
       <exec command="chown ${web.user} ${backup.db.dir}" passthru="true" checkreturn="false" />
-      <exec command="mysqldump -h${backup.db.host} -u${backup.db.username} -p${backup.db.password} ${backup.db.name} | gzip &gt; ${backup.db.file}" passthru="true" checkreturn="false" />
+      <exec command="mysqldump -h${backup.db.host} -u${backup.db.username} -p${backup.db.password} ${db.name} | gzip &gt; ${backup.db.file}" passthru="true" checkreturn="false" />
       <chmod file="${backup.db.file}" mode="0444" />
       <exec command="chown ${web.user} ${backup.db.file}" passthru="true" checkreturn="true" />
       <phingcall target="check-file"><property name="file" value="${backup.db.file}" /><property name="minsize" value="1" /></phingcall>
 
       <!-- restore database (new live) -->
-      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} -e &quot;drop database \`${build.db.name}\`&quot;" passthru="true" checkreturn="false" />
-      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} -e &quot;create database \`${build.db.name}\`&quot;" passthru="true" checkreturn="true" />
-      <exec command="gunzip &lt; ${backup.db.file} | mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} ${build.db.name}" checkreturn="false" />
+      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} -e &quot;drop database \`${db.name}\`&quot;" passthru="true" checkreturn="false" />
+      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} -e &quot;create database \`${db.name}\`&quot;" passthru="true" checkreturn="true" />
+      <exec command="gunzip &lt; ${backup.db.file} | mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} ${db.name}" checkreturn="false" />
 
       <!-- need the local files configured with the build db info because we will be running batch tasks from the build server -->
-      <property name="db.name" value="${build.db.name}" override="true" />
       <property name="db.host" value="${build.db.host}" override="true" />
       <property name="db.username" value="${build.db.username}" override="true" />
       <property name="db.password" value="${build.db.password}" override="true" />
@@ -279,7 +278,7 @@
 
       <!-- Generate the deployment scripts -->
       <dbdeploy
-         url="mysql:host=${build.db.host};dbname=${build.db.name}"
+         url="mysql:host=${build.db.host};dbname=${db.name}"
          userid="${build.db.username}"
          password="${build.db.password}"
          dir="${build.dir.db.deltas}"
@@ -287,14 +286,14 @@
          undooutputfile="${build.file.db.undo}" />
 
       <!-- Run the deployment file; use mysql command line to avoid trouble with large files or many statements and PDO -->
-      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} ${build.db.name} &lt; ${build.file.db.deploy}" passthru="true" checkreturn="true" />
+      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} ${db.name} &lt; ${build.file.db.deploy}" passthru="true" checkreturn="true" />
 
       <!-- load the batchdeploy task -->
       <taskdef name="batchdeploy" classname="phing.tasks.user.BatchDeployTask"/>
 
       <!-- Generate the deployment scripts -->
       <batchdeploy
-         url="mysql:host=${build.db.host};dbname=${build.db.name}"
+         url="mysql:host=${build.db.host};dbname=${db.name}"
          userid="${build.db.username}"
          password="${build.db.password}"
          dir="${build.dir.batch.deltas}"
@@ -397,7 +396,6 @@
          </then>
       </if>
 
-      <property name="build.db.name" value="${db.name}" />
       <property name="build.db.host" value="${db.host}" />
       <property name="build.db.username" value="${db.username}" />
       <property name="build.db.password" value="${db.password}" />
