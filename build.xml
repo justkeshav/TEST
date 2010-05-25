@@ -189,7 +189,7 @@
 
    <target name="build-property-files">
 
-      <property name="db.test.name" value="TEST-${db.name}" />
+      <property name="db.test.name" value="${db.name}-TEST" />
 
       <!-- Replace all vars in files with ".example." in their name and rename without the ".example" -->
       <copy todir="." overwrite="true">
