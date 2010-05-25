@@ -353,10 +353,10 @@
             <propertyprompt propertyName="web.host" promptText="What is the site's host name" defaultValue="lovetoknow.local" useExistingValue="true" />
             <propertyprompt propertyName="web.host.static" promptText="What is the site's host name for static content" defaultValue="static.lovetoknow.local" useExistingValue="true" />
             <propertyprompt propertyName="web.path" promptText="What is the path to the project dir" defaultValue="/ltk/ltk/dev" useExistingValue="true" />
-            <propertyprompt propertyName="web.db.name" promptText="What is the database name" defaultValue="ltk" useExistingValue="true" />
-            <propertyprompt propertyName="web.db.host" promptText="What is the database server host name" defaultValue="localhost" useExistingValue="true" />
-            <propertyprompt propertyName="web.db.username" promptText="What is the database username" defaultValue="root" useExistingValue="true" />
-            <propertyprompt propertyName="web.db.password" promptText="What is the database password" useExistingValue="true" />
+            <propertyprompt propertyName="db.name" promptText="What is the database name" defaultValue="ltk" useExistingValue="true" />
+            <propertyprompt propertyName="db.host" promptText="What is the database server host name" defaultValue="localhost" useExistingValue="true" />
+            <propertyprompt propertyName="db.username" promptText="What is the database username" defaultValue="root" useExistingValue="true" />
+            <propertyprompt propertyName="db.password" promptText="What is the database password" useExistingValue="true" />
          </then>
       </if>
 
@@ -370,10 +370,10 @@
             <append destFile="${build.properties}" text="web.host.static=${web.host.static}${line.separator}" />
             <append destFile="${build.properties}" text="web.path=${web.path}${line.separator}" />
             <append destFile="${build.properties}" text="${line.separator}" />
-            <append destFile="${build.properties}" text="web.db.name=${web.db.name}${line.separator}" />
-            <append destFile="${build.properties}" text="web.db.host=${web.db.host}${line.separator}" />
-            <append destFile="${build.properties}" text="web.db.username=${web.db.username}${line.separator}" />
-            <append destFile="${build.properties}" text="web.db.password=${web.db.password}${line.separator}" />
+            <append destFile="${build.properties}" text="db.name=${db.name}${line.separator}" />
+            <append destFile="${build.properties}" text="db.host=${db.host}${line.separator}" />
+            <append destFile="${build.properties}" text="db.username=${db.username}${line.separator}" />
+            <append destFile="${build.properties}" text="db.password=${db.password}${line.separator}" />
          </then>
       </if>
 
@@ -397,15 +397,10 @@
          </then>
       </if>
 
-      <property name="db.name" value="${web.db.name}" />
-      <property name="db.host" value="${web.db.host}" />
-      <property name="db.username" value="${web.db.username}" />
-      <property name="db.password" value="${web.db.password}" />
-
-      <property name="build.db.name" value="${web.db.name}" />
-      <property name="build.db.host" value="${web.db.host}" />
-      <property name="build.db.username" value="${web.db.username}" />
-      <property name="build.db.password" value="${web.db.password}" />
+      <property name="build.db.name" value="${db.name}" />
+      <property name="build.db.host" value="${db.host}" />
+      <property name="build.db.username" value="${db.username}" />
+      <property name="build.db.password" value="${db.password}" />
 
       <!-- Sets the DSTAMP, TSTAMP and TODAY properties -->
       <tstamp />
