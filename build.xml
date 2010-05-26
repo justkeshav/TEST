@@ -158,21 +158,21 @@
 
    <target name="publish-files" if="host">
       <property name="restore.file" value="/tmp/publish-${env.ORIG_BUILD_NUMBER}.tgz" />
-      <exec command="su ltk -c &quot;ssh -t ${host} \&quot;sudo mkdir -p -m 0755 ${publish.dir}; sudo chown ${web.user} ${publish.dir}\&quot;&quot;" passthru="true" checkreturn="true" />
+      <exec command="su ltk -c &quot;ssh ${host} \&quot;sudo mkdir -p -m 0755 ${publish.dir}; sudo chown ${web.user} ${publish.dir}\&quot;&quot;" passthru="true" checkreturn="true" />
       <exec command="su ltk -c &quot;scp -Bpq ${backup.file} ${host}:${restore.file}&quot;" passthru="true" checkreturn="true" />
-      <exec command="su ltk -c &quot;ssh -t ${host} \&quot;cd ${publish.dir}; sudo tar --atime-preserve -xpf ${restore.file}; sudo rm ${restore.file}\&quot;&quot;" passthru="true" checkreturn="true" />
+      <exec command="su ltk -c &quot;ssh ${host} \&quot;cd ${publish.dir}; sudo tar --atime-preserve -xpf ${restore.file}; sudo rm ${restore.file}\&quot;&quot;" passthru="true" checkreturn="true" />
    </target>
 
    <target name="publish-disable-admin" if="host">
-      <exec command="su ltk -c &quot;ssh -t ${host} sudo php ${web.path}/site/symfony project:disable prod backend&quot;" passthru="true" checkreturn="false" />
+      <exec command="su ltk -c &quot;ssh ${host} sudo php ${web.path}/site/symfony project:disable prod backend&quot;" passthru="true" checkreturn="false" />
       <exec command="wget --http-user=test --http-password=ltk123 -O - http://admin.${web.host}/" passthru="true" />
       <exec command="wget --http-user=test --http-password=ltk123 -O - http://admin.${web.host}/ | grep &quot;Temporarily Unavailable&quot;" passthru="true" checkreturn="false" />
    </target>
 
    <target name="publish-enable-site" if="host">
-      <exec command="su ltk -c &quot;ssh -t ${host} sudo rm ${web.path}&quot;" passthru="true" checkreturn="true" />
-      <exec command="su ltk -c &quot;ssh -t ${host} sudo ln -s ${publish.dir} ${web.path}&quot;" passthru="true" checkreturn="true" />
-      <exec command="su ltk -c &quot;ssh -t ${host} sudo ltkrestart&quot;" passthru="true" checkreturn="true" />
+      <exec command="su ltk -c &quot;ssh ${host} sudo rm ${web.path}&quot;" passthru="true" checkreturn="true" />
+      <exec command="su ltk -c &quot;ssh ${host} sudo ln -s ${publish.dir} ${web.path}&quot;" passthru="true" checkreturn="true" />
+      <exec command="su ltk -c &quot;ssh ${host} sudo ltkrestart&quot;" passthru="true" checkreturn="true" />
    </target>
 
    <target name="check-file" if="file">
