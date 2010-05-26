@@ -122,16 +122,16 @@
       <!-- backup prior database (old live) -->
       <mkdir dir="${backup.db.dir}" />
       <chmod file="${backup.db.dir}" mode="0775" />
-      <exec command="chown ${web.user} ${backup.db.dir}" passthru="true" checkreturn="false" />
-      <exec command="mysqldump -h${backup.db.host} -u${backup.db.username} -p${backup.db.password} ${backup.db.name} | gzip &gt; ${backup.db.file}" passthru="true" checkreturn="false" />
+      <exec command="chown ${web.user} ${backup.db.dir}" passthru="true" checkreturn="true" />
+      <exec command="mysqldump -h${backup.db.host} -u${backup.db.username} -p${backup.db.password} ${backup.db.name} | gzip &gt; ${backup.db.file}" passthru="true" checkreturn="true" />
       <chmod file="${backup.db.file}" mode="0444" />
       <exec command="chown ${web.user} ${backup.db.file}" passthru="true" checkreturn="true" />
       <phingcall target="check-file"><property name="file" value="${backup.db.file}" /><property name="minsize" value="1" /></phingcall>
 
       <!-- restore database (new live) -->
-      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} -e &quot;drop database \`${build.db.name}\`&quot;" passthru="true" checkreturn="false" />
+      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} -e &quot;drop database \`${build.db.name}\`&quot;" passthru="true" checkreturn="true" />
       <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} -e &quot;create database \`${build.db.name}\`&quot;" passthru="true" checkreturn="true" />
-      <exec command="gunzip &lt; ${backup.db.file} | mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} ${build.db.name}" checkreturn="false" />
+      <exec command="gunzip &lt; ${backup.db.file} | mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} ${build.db.name}" checkreturn="true" />
 
       <!-- need the local files configured with the build db info because we will be running batch tasks from the build server -->
       <property name="db.name" value="${build.db.name}" override="true" />
@@ -164,7 +164,7 @@
    </target>
 
    <target name="publish-disable-admin" if="host">
-      <exec command="su ltk -c &quot;ssh ${host} sudo php ${web.path}/site/symfony project:disable prod backend&quot;" passthru="true" checkreturn="false" />
+      <exec command="su ltk -c &quot;ssh ${host} sudo php ${web.path}/site/symfony project:disable prod backend&quot;" passthru="true" checkreturn="true" />
       <exec command="wget --http-user=test --http-password=ltk123 -O - http://admin.${web.host}/" passthru="true" />
       <exec command="wget --http-user=test --http-password=ltk123 -O - http://admin.${web.host}/ | grep &quot;Temporarily Unavailable&quot;" passthru="true" checkreturn="false" />
    </target>
@@ -177,7 +177,7 @@
 
    <target name="check-file" if="file">
 
-      <property name="minsize" value="0" />
+      <property name="minsize" value="1" />
 
       <available file="${file}" type="file" property="found" />
       <if><not><isset property="found" /></not><then><fail message="File '${file}' not found." /></then></if>
