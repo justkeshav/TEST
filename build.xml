@@ -108,7 +108,7 @@
       <mkdir dir="${backup.dir}" />
       <chmod file="${backup.dir}" mode="0775" />
       <exec command="chown ${web.user} ${backup.dir}" passthru="true" checkreturn="true" />
-      <exec command="tar --atime-preserve -zcpf ${backup.file} ." passthru="true" checkreturn="true" />
+      <exec command="tar --atime-preserve -zcpf ${backup.file} .." passthru="true" checkreturn="true" />
       <chmod file="${backup.file}" mode="0444" />
       <exec command="chown ${web.user} ${backup.file}" passthru="true" checkreturn="true" />
       <phingcall target="check-file"><property name="file" value="${backup.file}" /><property name="minsize" value="1048577" /></phingcall>
