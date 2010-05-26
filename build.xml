@@ -97,10 +97,10 @@
       <phingcall target="build-files" />
 
       <!-- compress css & js -->
-      <foreach param="file" target="yuicompressor">
+      <foreach param="rfile" absparam="file" target="yuicompressor">
          <fileset dir="web" >
-            <include name="**.js" />
-            <include name="**.css" />
+            <include name="js/**.js" />
+            <include name="css/**.css" />
          </fileset>
       </foreach>
 
@@ -123,17 +123,18 @@
       <mkdir dir="${backup.db.dir}" />
       <chmod file="${backup.db.dir}" mode="0775" />
       <exec command="chown ${web.user} ${backup.db.dir}" passthru="true" checkreturn="false" />
-      <exec command="mysqldump -h${backup.db.host} -u${backup.db.username} -p${backup.db.password} ${db.name} | gzip &gt; ${backup.db.file}" passthru="true" checkreturn="false" />
+      <exec command="mysqldump -h${backup.db.host} -u${backup.db.username} -p${backup.db.password} ${backup.db.name} | gzip &gt; ${backup.db.file}" passthru="true" checkreturn="false" />
       <chmod file="${backup.db.file}" mode="0444" />
       <exec command="chown ${web.user} ${backup.db.file}" passthru="true" checkreturn="true" />
       <phingcall target="check-file"><property name="file" value="${backup.db.file}" /><property name="minsize" value="1" /></phingcall>
 
       <!-- restore database (new live) -->
-      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} -e &quot;drop database \`${db.name}\`&quot;" passthru="true" checkreturn="false" />
-      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} -e &quot;create database \`${db.name}\`&quot;" passthru="true" checkreturn="true" />
-      <exec command="gunzip &lt; ${backup.db.file} | mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} ${db.name}" checkreturn="false" />
+      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} -e &quot;drop database \`${build.db.name}\`&quot;" passthru="true" checkreturn="false" />
+      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} -e &quot;create database \`${build.db.name}\`&quot;" passthru="true" checkreturn="true" />
+      <exec command="gunzip &lt; ${backup.db.file} | mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} ${build.db.name}" checkreturn="false" />
 
       <!-- need the local files configured with the build db info because we will be running batch tasks from the build server -->
+      <property name="db.name" value="${build.db.name}" override="true" />
       <property name="db.host" value="${build.db.host}" override="true" />
       <property name="db.username" value="${build.db.username}" override="true" />
       <property name="db.password" value="${build.db.password}" override="true" />
@@ -278,7 +279,7 @@
 
       <!-- Generate the deployment scripts -->
       <dbdeploy
-         url="mysql:host=${build.db.host};dbname=${db.name}"
+         url="mysql:host=${build.db.host};dbname=${build.db.name}"
          userid="${build.db.username}"
          password="${build.db.password}"
          dir="${build.dir.db.deltas}"
@@ -286,14 +287,14 @@
          undooutputfile="${build.file.db.undo}" />
 
       <!-- Run the deployment file; use mysql command line to avoid trouble with large files or many statements and PDO -->
-      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} ${db.name} &lt; ${build.file.db.deploy}" passthru="true" checkreturn="true" />
+      <exec command="mysql -h${build.db.host} -u${build.db.username} -p${build.db.password} ${build.db.name} &lt; ${build.file.db.deploy}" passthru="true" checkreturn="true" />
 
       <!-- load the batchdeploy task -->
       <taskdef name="batchdeploy" classname="phing.tasks.user.BatchDeployTask"/>
 
       <!-- Generate the deployment scripts -->
       <batchdeploy
-         url="mysql:host=${build.db.host};dbname=${db.name}"
+         url="mysql:host=${build.db.host};dbname=${build.db.name}"
          userid="${build.db.username}"
          password="${build.db.password}"
          dir="${build.dir.batch.deltas}"
@@ -309,6 +310,7 @@
       <property name="build.properties.env" value="../env.properties" />
       <property name="build.interactive" value="true" />
       <property name="build.interactive.firstrun" value="false" />
+      <property name="build.debug" value="false" />
       <property name="provider.cache.query" value="Doctrine_Cache_Array" />
       <property name="provider.cache.result" value="Doctrine_Cache_Array" />
       <property name="provider.cache.result.lifespan" value="3600" />
@@ -352,10 +354,10 @@
             <propertyprompt propertyName="web.host" promptText="What is the site's host name" defaultValue="lovetoknow.local" useExistingValue="true" />
             <propertyprompt propertyName="web.host.static" promptText="What is the site's host name for static content" defaultValue="static.lovetoknow.local" useExistingValue="true" />
             <propertyprompt propertyName="web.path" promptText="What is the path to the project dir" defaultValue="/ltk/ltk/dev" useExistingValue="true" />
-            <propertyprompt propertyName="db.name" promptText="What is the database name" defaultValue="ltk" useExistingValue="true" />
-            <propertyprompt propertyName="db.host" promptText="What is the database server host name" defaultValue="localhost" useExistingValue="true" />
-            <propertyprompt propertyName="db.username" promptText="What is the database username" defaultValue="root" useExistingValue="true" />
-            <propertyprompt propertyName="db.password" promptText="What is the database password" useExistingValue="true" />
+            <propertyprompt propertyName="web.db.name" promptText="What is the database name" defaultValue="ltk" useExistingValue="true" />
+            <propertyprompt propertyName="web.db.host" promptText="What is the database server host name" defaultValue="localhost" useExistingValue="true" />
+            <propertyprompt propertyName="web.db.username" promptText="What is the database username" defaultValue="root" useExistingValue="true" />
+            <propertyprompt propertyName="web.db.password" promptText="What is the database password" useExistingValue="true" />
          </then>
       </if>
 
@@ -369,10 +371,10 @@
             <append destFile="${build.properties}" text="web.host.static=${web.host.static}${line.separator}" />
             <append destFile="${build.properties}" text="web.path=${web.path}${line.separator}" />
             <append destFile="${build.properties}" text="${line.separator}" />
-            <append destFile="${build.properties}" text="db.name=${db.name}${line.separator}" />
-            <append destFile="${build.properties}" text="db.host=${db.host}${line.separator}" />
-            <append destFile="${build.properties}" text="db.username=${db.username}${line.separator}" />
-            <append destFile="${build.properties}" text="db.password=${db.password}${line.separator}" />
+            <append destFile="${build.properties}" text="web.db.name=${web.db.name}${line.separator}" />
+            <append destFile="${build.properties}" text="web.db.host=${web.db.host}${line.separator}" />
+            <append destFile="${build.properties}" text="web.db.username=${web.db.username}${line.separator}" />
+            <append destFile="${build.properties}" text="web.db.password=${web.db.password}${line.separator}" />
          </then>
       </if>
 
@@ -396,9 +398,20 @@
          </then>
       </if>
 
+      <property name="db.name" value="${web.db.name}" />
+      <property name="db.host" value="${web.db.host}" />
+      <property name="db.username" value="${web.db.username}" />
+      <property name="db.password" value="${web.db.password}" />
+
+      <property name="build.db.name" value="${db.name}" />
       <property name="build.db.host" value="${db.host}" />
       <property name="build.db.username" value="${db.username}" />
       <property name="build.db.password" value="${db.password}" />
+
+      <property name="backup.db.name" value="${db.name}" />
+      <property name="backup.db.host" value="${db.host}" />
+      <property name="backup.db.username" value="${db.username}" />
+      <property name="backup.db.password" value="${db.password}" />
 
       <!-- Sets the DSTAMP, TSTAMP and TODAY properties -->
       <tstamp />

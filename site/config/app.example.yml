@@ -6,7 +6,7 @@ all:
   static_host: ${web.host.static}
   static_cache: ${web.cache.static}
   web_server:
-    group: ${web.user.group}
+    user: ${web.user}
   image_provider:
     class: ${provider.image}
     host: ${provider.image.host}
